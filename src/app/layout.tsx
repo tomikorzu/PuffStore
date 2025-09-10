@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import AppProvider from "@/modules/shared/providers/AppProvider.provider";
+import Header from "@/modules/shared/components/Header/Header.component";
+import Footer from "@/modules/shared/components/Footer/Footer.component";
 
 export const metadata: Metadata = {
   title: "Zennify",
@@ -14,7 +16,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <AppProvider>{children}</AppProvider>
+        <AppProvider>
+          <Header />
+          {children}
+          <Footer />
+        </AppProvider>
       </body>
     </html>
   );

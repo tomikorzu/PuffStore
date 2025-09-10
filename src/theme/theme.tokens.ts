@@ -14,7 +14,7 @@ export const colors = {
     10: "#FAFAFA",
   },
   white: {
-    900: "#121212",
+    900: "#000",
     800: "#1E1E1E",
     700: "#343434",
     600: "#525252",
@@ -42,15 +42,15 @@ export const radius = {
 };
 
 export const surface = {
-  level1: colors.black[900],
-  level1Negative: colors.white[10],
-  level2: colors.black[800],
+  level1: colors.white[10],
+  level1Negative: colors.black[900],
+  level2: colors.white[800],
   level2Negative: colors.white[100],
-  level3: colors.black[700],
-  level4: colors.black[600],
-  level5: colors.black[500],
-  level6: colors.black[400],
-  neutral: colors.black[500],
+  level3: colors.white[700],
+  level4: colors.white[600],
+  level5: colors.white[500],
+  level6: colors.white[400],
+  neutral: colors.white[500],
 };
 
 export const buttons = {
@@ -67,13 +67,19 @@ export const buttons = {
   },
   text: {
     contained: {
-      enabled: colors.white[10],
-      disabled: colors.white[500],
+      enabled: colors.black[10],
+      hovered: colors.black[600],
+      disabled: colors.white[700],
     },
     outlined: {
       enabled: colors.white[10],
-      hovered: colors.white[25],
-      disabled: colors.white[500],
+      hovered: colors.black[600],
+      disabled: colors.white[700],
+    },
+    text: {
+      enabled: colors.white[10],
+      hovered: colors.black[600],
+      disabled: colors.white[700],
     },
   },
   radius: {
@@ -85,12 +91,10 @@ export const buttons = {
 };
 
 export const text = {
-  enabled: colors.white[10],
-  enabledSubtle: colors.white[100],
-  enabledNegative: colors.black[900],
-  enabledNegativeSubtle: colors.black[800],
+  enabled: colors.black[900],
   hovered: colors.white[50],
   disabled: colors.white[500],
+  secondary: colors.white[10],
 };
 
 export const icons = {

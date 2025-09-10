@@ -12,8 +12,8 @@ import {
 } from "./theme.tokens";
 
 export const palette = {
-  primary: { main: buttons.base.primary.enabled },
-  secondary: { main: buttons.base.secondary.enabled },
+  primary: { main: text.enabled },
+  secondary: { main: text.secondary },
 
   colors,
   radius,

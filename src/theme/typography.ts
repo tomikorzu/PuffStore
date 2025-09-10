@@ -3,14 +3,13 @@ import { palette } from "./palette";
 export const typography = {
   allVariants: {
     color: palette.text.enabled,
-    lineHeight: "clamp(1.3em, 1.5em, 1.5em)",
   },
   body1: {
     fontSize: "clamp(14px, 2vw, 16px)",
     fontWeight: 400,
   },
   body2: {
-    fontSize: "clamp(12px, 2vw, 14px)",
+    fontSize: "clamp(12px, 1vw, 14px)",
     fontWeight: 400,
   },
   h1: {

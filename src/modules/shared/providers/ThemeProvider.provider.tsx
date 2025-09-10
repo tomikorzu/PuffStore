@@ -22,7 +22,7 @@ export default function ThemeProvider({
           },
           body: {
             backgroundColor: palette.surface.level1,
-            color: palette.colors.white[10],
+            color: palette.text.enabled,
           },
         }}
       />

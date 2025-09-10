@@ -17,5 +17,5 @@ export const theme = createTheme({
   },
   components: {
     ...button,
-  },
+  } as any,
 });
