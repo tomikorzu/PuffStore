@@ -1,7 +1,5 @@
-export default function Home() {
-  return (
-    <main style={{ backgroundColor: "red" }}>
-      <div>Hello world!</div>
-    </main>
-  );
+import Home from "@/modules/Home/Home.component";
+
+export default function HomePage() {
+  return <Home />;
 }

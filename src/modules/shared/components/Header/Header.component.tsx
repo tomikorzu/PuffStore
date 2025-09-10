@@ -1,7 +1,7 @@
 import TopBanner from "./TopBanner/TopBanner.component";
 import Navbar from "./Navbar/Navbar.component";
 import { Divider, Stack } from "@mui/material";
-import { maxContentWidth } from "../../constants/pixels";
+import { maxContentWidth } from "../../constants/units";
 
 export default function Header() {
   return (

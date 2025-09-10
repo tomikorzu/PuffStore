@@ -2,7 +2,7 @@
 
 import { palette } from "@/theme/palette";
 import { Button, Stack, Typography } from "@mui/material";
-import { maxContentWidth } from "@/modules/shared/constants/pixels";
+import { maxContentWidth } from "@/modules/shared/constants/units";
 
 export default function TopBanner() {
   return (

@@ -1,8 +1,10 @@
 import { palette } from "./palette";
 
 export const typography = {
+  fontFamily: ["Satoshi", "Integral CF", "sans-serif"].join(","),
   allVariants: {
     color: palette.text.enabled,
+    fontFamily: "Satoshi, sans-serif",
   },
   body1: {
     fontSize: "clamp(14px, 2vw, 16px)",
@@ -13,29 +15,35 @@ export const typography = {
     fontWeight: 400,
   },
   h1: {
-    fontSize: "clamp(14px, 4vw, 24px)",
-    fontWeight: 600,
+    fontSize: "32px",
+    fontWeight: 700,
+    fontFamily: "Integral CF, Satoshi, sans-serif",
   },
   h2: {
-    fontSize: "clamp(12px, 3vw, 20px)",
-    fontWeight: 600,
+    fontSize: "60px",
+    fontWeight: 700,
+    fontFamily: "Integral CF, Satoshi, sans-serif",
   },
   h3: {
-    fontSize: "clamp(12px, 2vw, 18px)",
-    fontWeight: 600,
+    fontSize: "48px",
+    fontWeight: 700,
+    fontFamily: "Integral CF, Satoshi, sans-serif",
   },
   h4: {
-    fontSize: "clamp(12px, 1vw, 16px)",
-    fontWeight: 600,
+    fontSize: "40px",
+    fontWeight: 700,
+    fontFamily: "Integral CF, Satoshi, sans-serif",
   },
 
   h5: {
     fontSize: "clamp(12px, 0.5vw, 14px)",
-    fontWeight: 600,
+    fontWeight: 700,
+    fontFamily: "Integral CF, Satoshi, sans-serif",
   },
   h6: {
     fontSize: "clamp(12px, 0.2vw, 12px)",
-    fontWeight: 600,
+    fontWeight: 700,
+    fontFamily: "Integral CF, Satoshi, sans-serif",
   },
   bolder: {
     fontWeight: 700,

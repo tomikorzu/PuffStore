@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import { palette } from "@/theme/palette";
-import { maxContentWidth } from "@/modules/shared/constants/pixels";
+import { maxContentWidth } from "@/modules/shared/constants/units";
 import { links } from "./links.util";
 import { Person, Search, ShoppingCart } from "@mui/icons-material";
 import NextLink from "next/link";
@@ -21,7 +21,7 @@ export default function Navbar() {
         direction="row"
         alignItems="center"
         justifyContent="space-between"
-        gap={2}
+        gap={3}
         sx={{
           width: "100%",
           maxWidth: maxContentWidth,
@@ -32,7 +32,12 @@ export default function Navbar() {
             zennify
           </Typography>
         </Link>
-        <Stack component="nav" direction="row" gap={3}>
+        <Stack
+          component="nav"
+          direction="row"
+          gap={3}
+          sx={{ minWidth: "fit-content" }}
+        >
           {links.map((link) => (
             <Link
               key={link.href}
