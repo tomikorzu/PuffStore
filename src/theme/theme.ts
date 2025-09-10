@@ -15,7 +15,8 @@ export const theme = createTheme({
       xl: 1440, // 1536px and above
     },
   },
+  // @ts-expect-error MUI type mismatch
   components: {
     ...button,
-  } as any,
+  },
 });
