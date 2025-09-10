@@ -1,0 +1,21 @@
+import { createTheme } from "@mui/material/styles";
+import { palette } from "./palette";
+import { typography } from "./typography";
+import { button } from "./components/button";
+
+export const theme = createTheme({
+  palette,
+  typography,
+  breakpoints: {
+    values: {
+      xs: 0, // 0px and above
+      sm: 600, // 600px and above
+      md: 900, // 900px and above
+      lg: 1200, // 1200px and above
+      xl: 1440, // 1536px and above
+    },
+  },
+  components: {
+    ...button,
+  },
+});

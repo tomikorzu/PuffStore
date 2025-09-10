@@ -1,0 +1,203 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Guides/Storybook" />
+
+# 📘 Guide to Installing and Using Storybook for Documenting Components
+
+## 🧩 What is Storybook?
+
+Storybook is a development tool that allows you to build and document components in isolation. Ideal for design and development teams, it simplifies exploration, testing, and visual documentation of each UI component.
+
+---
+
+## ✅ Prerequisites
+
+- Node.js v14 or higher
+- A project set up with React (or the corresponding framework)
+- A package manager (npm, yarn, or pnpm)
+
+---
+
+## 🛠️ Installing Storybook
+
+1. **Go to the project root:**
+
+```bash
+cd my-project
+```
+
+2. **Install Storybook using the official CLI:**
+
+```bash
+npx storybook@latest init
+```
+
+This will automatically detect the framework used (React, Vue, etc.) and add the necessary files.
+
+3. **Verify created structure:**
+   The CLI will add the following default structure:
+
+```
+.storybook/
+ ├── main.js
+ ├── preview.js
+ └── manager.js (optional)
+stories/
+ └── Button.stories.jsx
+```
+
+---
+
+## 🚀 Running Storybook
+
+Once installed, you can start the development environment with:
+
+```bash
+npm run storybook
+```
+
+This will open Storybook at `http://localhost:6006`.
+
+---
+
+## 📄 Basic Template for a `.stories.tsx` File
+
+> 🗂️ **Note:** It's not strictly necessary to place your story files in the `stories/` folder.  
+> A recommended approach is to colocate stories next to their respective components (e.g., `Button.tsx` + `Button.stories.tsx`) to keep related files grouped together.  
+> Storybook will automatically detect these files based on its configuration (e.g., files ending in `.stories.tsx`).
+
+Below is a reusable base example to create stories for a component:
+
+```tsx
+// src/components/COMPONENT_NAME/COMPONENT_NAME.stories.tsx
+
+import type { Meta, StoryObj } from "@storybook/react";
+import { COMPONENT_NAME } from "./COMPONENT_NAME";
+
+const meta: Meta<typeof COMPONENT_NAME> = {
+  title: "Path/In/Sidebar", // Optional. Used to define the sidebar group, e.g., 'Components/Button'
+  component: COMPONENT_NAME,
+  tags: ["autodocs"], // enables automatic docs generation
+  args: {
+    // default props for all stories
+  },
+  argTypes: {
+    // manual control of props if needed
+  },
+};
+
+export default meta;
+type Story = StoryObj<typeof COMPONENT_NAME>;
+
+export const Default: Story = {
+  args: {
+    // specific props for this variant
+  },
+};
+
+export const SecondaryVariant: Story = {
+  args: {
+    // another set of props
+  },
+};
+```
+
+🔁 **Replace** `COMPONENT_NAME` and `'Path/In/Sidebar'` with values from your project.  
+📝 Using `args` and `argTypes` lets you create interactive controls in the Storybook UI.
+
+---
+
+## 🧱 Recommended File Organization
+
+```bash
+src/
+ └── components/
+     └── Button/
+         ├── Button.tsx
+         └── Button.stories.tsx
+```
+
+---
+
+## 📚 Automatic Documentation
+
+If you're using TypeScript and properly configure `args`, Storybook will generate visual documentation for each story, displaying props, states, and events.  
+This is enabled by the `@storybook/addon-docs` addon, included in `addon-essentials`.
+
+---
+
+## 🔌 Recommended Addons
+
+```bash
+npm install @storybook/addon-essentials
+```
+
+Includes:
+
+- **Docs:** for auto documentation
+- **Controls:** to interactively test props
+- **Actions:** to visualize events like `onClick`
+- **Viewport:** to test responsiveness on different screen sizes
+
+Enable it in `.storybook/main.js`:
+
+```js
+module.exports = {
+  addons: ["@storybook/addon-essentials"],
+};
+```
+
+---
+
+## 🧠 Tips for Improving AutoDocs
+
+To get the most out of Storybook’s automatic documentation generation (`autodocs`), follow these best practices:
+
+1. **Use TypeScript**  
+   Storybook reads TypeScript definitions to generate detailed prop tables and types.
+
+2. **Define clear `args` and `argTypes`**  
+   Use `args` to provide sensible default values for each prop. Use `argTypes` to control how each prop is displayed or documented (e.g., dropdowns for enums).
+
+3. **Add JSDoc comments**  
+   Comment your component props and functions to provide descriptions in the docs tab.
+
+   ```tsx
+   interface ButtonProps {
+     /** Text to display inside the button */
+     label: string;
+
+     /** Type of button style */
+     variant?: "primary" | "secondary";
+   }
+   ```
+
+4. **Export components as named constants**  
+   This helps Storybook recognize the display name correctly.
+
+   ```tsx
+   export const Button = ({ label }: ButtonProps) => {
+     return <button>{label}</button>;
+   };
+   ```
+
+5. **Avoid anonymous/default exports**  
+   Named exports are easier for Storybook to document and render reliably.
+
+6. **Use descriptive story names**  
+   The export names (`Default`, `WithIcon`, etc.) are used in the sidebar and docs.
+
+7. **Group stories with `title`**  
+   Although optional, `title` organizes your stories in the sidebar and helps in generating structured docs.
+
+---
+
+## 📦 Production Build (Optional)
+
+To generate a static version to deploy:
+
+```bash
+npm run build-storybook
+```
+
+This will create a `storybook-static/` folder ready for deployment.
