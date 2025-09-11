@@ -9,7 +9,7 @@ export default function InterfaceWrapper({
   return (
     <>
       <Header />
-      {children}
+      <main>{children}</main>
       <Footer />
     </>
   );

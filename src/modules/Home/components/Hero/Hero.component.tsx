@@ -8,7 +8,12 @@ export default function Hero() {
     <Stack bgcolor={palette.surface.level3} alignItems="center">
       <Stack sx={{ maxWidth: maxContentWidth }}>
         <Stack gap={3} maxWidth={600}>
-          <Typography variant="h2" textTransform="uppercase">
+          <Typography
+            variant="h2"
+            textTransform="uppercase"
+            lineHeight={1}
+            fontWeight={700}
+          >
             FIND CLOTHES THAT MATCHES YOUR STYLE
           </Typography>
           <Typography>
