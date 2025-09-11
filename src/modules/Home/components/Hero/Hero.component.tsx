@@ -27,6 +27,8 @@ export default function Hero() {
           <Stack
             direction="row"
             gap={3}
+            flexWrap="wrap"
+            justifyContent={{ xs: "center", md: "start" }}
             divider={
               <Divider
                 orientation="vertical"
