@@ -24,7 +24,7 @@ export default function Navbar() {
         gap={3}
         sx={{
           width: "100%",
-          maxWidth: maxContentWidth,
+          maxWidth: { xs: maxContentWidth.mobile, md: maxContentWidth.desktop },
         }}
       >
         <Link href="/" component={NextLink} sx={{ textDecoration: "none" }}>

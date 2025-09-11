@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import Footer from "../Footer/Footer.component";
 import Header from "../Header/Header.component";
 
@@ -9,7 +10,7 @@ export default function InterfaceWrapper({
   return (
     <>
       <Header />
-      <main>{children}</main>
+      <Box component="main">{children}</Box>
       <Footer />
     </>
   );

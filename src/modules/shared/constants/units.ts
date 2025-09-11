@@ -1,1 +1,1 @@
-export const maxContentWidth = 1280;
+export const maxContentWidth = { mobile: 500, desktop: 1280 };

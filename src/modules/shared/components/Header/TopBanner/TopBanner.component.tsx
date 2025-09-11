@@ -1,8 +1,9 @@
 "use client";
 
 import { palette } from "@/theme/palette";
-import { Button, Stack, Typography } from "@mui/material";
+import { Link, Stack, Typography } from "@mui/material";
 import { maxContentWidth } from "@/modules/shared/constants/units";
+import NextLink from "next/link";
 
 export default function TopBanner() {
   return (
@@ -13,25 +14,26 @@ export default function TopBanner() {
       px={2}
     >
       <Stack
-        direction="row"
         alignItems="center"
-        justifyContent="center"
-        gap={0.5}
         sx={{
           width: "100%",
-          maxWidth: maxContentWidth,
+          maxWidth: { xs: maxContentWidth.mobile, md: maxContentWidth.desktop },
         }}
       >
         <Typography variant="body2" color="secondary">
-          Sign up and get 20% off to your first order.
+          Sign up and get 20% off to your first order.{" "}
+          <Link
+            href="/login"
+            color="secondary"
+            component={NextLink}
+            sx={{
+              fontWeight: 600,
+              textDecoration: "underline",
+            }}
+          >
+            Sign Up Now
+          </Link>
         </Typography>
-        <Button
-          color="primary"
-          variant="text"
-          sx={{ fontSize: "clamp(12px, 1vw, 14px)" }}
-        >
-          Sign Up Now
-        </Button>
       </Stack>
     </Stack>
   );
