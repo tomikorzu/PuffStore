@@ -9,7 +9,9 @@ export default function Stats({
 }) {
   return (
     <Stack>
-      <Typography variant="h4">{title}</Typography>
+      <Typography fontSize={{ xs: 24, md: 32 }} fontWeight={700}>
+        {title}
+      </Typography>
       <Typography>{value}</Typography>
     </Stack>
   );
