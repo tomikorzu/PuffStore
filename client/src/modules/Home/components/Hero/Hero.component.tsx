@@ -1,11 +1,32 @@
-import { Button, Divider, Stack, Typography } from "@mui/material";
+"use client";
+
+import { Button, Divider, Skeleton, Stack, Typography } from "@mui/material";
 import { palette } from "@/theme/palette";
 import { maxContentWidth } from "@/modules/shared/constants/units";
 import Stats from "./components/Stats.component";
 import { AutoAwesome } from "@mui/icons-material";
 import Banner from "./components/Banner.component";
+import { getHomeInfo } from "@/modules/strapi/Home/getHomeInfo.util";
+import { useEffect, useState } from "react";
 
 export default function Hero() {
+  const [data, setData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (data) {
+      setLoading(false);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    getHomeInfo().then((data) => setData(data.data));
+  }, []);
+
+  if (loading) {
+    return <Skeleton variant="rectangular" height={500} />;
+  }
+
   return (
     <Stack
       component="section"
@@ -31,14 +52,10 @@ export default function Hero() {
             fontWeight={700}
             maxWidth={{ xs: 300, md: "initial" }}
           >
-            FIND CLOTHES THAT MATCHES YOUR STYLE
+            {data.title}
           </Typography>
-          <Typography>
-            Browse through our diverse range of meticulously crafted garments,
-            designed to bring out your individuality and cater to your sense of
-            style.
-          </Typography>
-         
+          <Typography>{data.description}</Typography>
+
           <Stack
             direction="row"
             gap={3}
