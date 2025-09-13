@@ -8,6 +8,7 @@ import { AutoAwesome } from "@mui/icons-material";
 import Banner from "./components/Banner.component";
 import { getHomeInfo } from "@/modules/strapi/Home/getHomeInfo.util";
 import { useEffect, useState } from "react";
+import { queryHost } from "@/modules/shared/utils/strapi.util";
 
 export default function Hero() {
   const [data, setData] = useState<any>(null);
@@ -108,7 +109,7 @@ export default function Hero() {
             }}
           />
           <img
-            src="/images/hero.png"
+            src={queryHost + data?.image?.url}
             alt="Hero Image"
             style={{
               objectFit: "cover",
