@@ -11,7 +11,13 @@ import { useEffect, useState } from "react";
 import { queryHost } from "@/modules/shared/utils/strapi.util";
 
 export default function Hero() {
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<{
+    title: string;
+    description: string;
+    image: {
+      url: string;
+    };
+  } | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -53,9 +59,9 @@ export default function Hero() {
             fontWeight={700}
             maxWidth={{ xs: 300, md: "initial" }}
           >
-            {data.title}
+            {data?.title}
           </Typography>
-          <Typography>{data.description}</Typography>
+          <Typography>{data?.description}</Typography>
 
           <Stack
             direction="row"
@@ -109,7 +115,7 @@ export default function Hero() {
             }}
           />
           <img
-            src={queryHost + data?.image?.url}
+            src={queryHost! + data?.image?.url || ""}
             alt="Hero Image"
             style={{
               objectFit: "cover",
