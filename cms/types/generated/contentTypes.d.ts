@@ -394,6 +394,10 @@ export interface ApiHomeHome extends Struct.SingleTypeSchema {
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::home.home'> &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    sponsors: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
     Stats: Schema.Attribute.Component<'home.stats', true>;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;

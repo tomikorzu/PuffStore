@@ -7,3 +7,20 @@ export async function queryStrapi(url: string) {
     },
   });
 }
+
+export async function getStrapiData(section: string) {
+  const params = "populate=*";
+  try {
+    const response = await queryStrapi(`${section}?${params}`);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error getting strapi data:", error);
+    throw error;
+  }
+}

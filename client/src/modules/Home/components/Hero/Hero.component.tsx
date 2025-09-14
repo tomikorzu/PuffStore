@@ -6,19 +6,31 @@ import { maxContentWidth } from "@/modules/shared/constants/units";
 import Stats from "./components/Stats.component";
 import { AutoAwesome } from "@mui/icons-material";
 import Banner from "./components/Banner.component";
-import { getHomeInfo } from "@/modules/strapi/Home/getHomeInfo.util";
 import { useEffect, useState } from "react";
-import { queryHost } from "@/modules/shared/utils/strapi.util";
+import { getStrapiData, queryHost } from "@/modules/shared/utils/strapi.util";
 
-export default function Hero() {
-  const [data, setData] = useState<{
+interface HomeData {
+  title: string;
+  description: string;
+  image: {
+    url: string;
+  };
+  Stats: {
+    id: string;
     title: string;
     description: string;
-    image: {
-      url: string;
-    };
-  } | null>(null);
+  }[];
+  sponsors: {
+    id: string;
+    url: string;
+  }[];
+}
+
+export default function Hero() {
+  const [data, setData] = useState<HomeData | null>(null);
   const [loading, setLoading] = useState(true);
+
+  console.log(data);
 
   useEffect(() => {
     if (data) {
@@ -27,7 +39,7 @@ export default function Hero() {
   }, [data]);
 
   useEffect(() => {
-    getHomeInfo().then((data) => setData(data.data));
+    getStrapiData("home").then((data) => setData(data.data));
   }, []);
 
   if (loading) {
@@ -75,9 +87,13 @@ export default function Hero() {
               />
             }
           >
-            <Stats title="200+" value="International Brands" />
-            <Stats title="2,000+" value="High-Quality Products" />
-            <Stats title="30,000+" value="Happy Customers" />
+            {data?.Stats?.map((stat) => (
+              <Stats
+                key={stat.id}
+                title={stat.title}
+                value={stat.description}
+              />
+            ))}
           </Stack>
           <Button
             sx={{
@@ -123,7 +139,37 @@ export default function Hero() {
           />
         </Stack>
       </Stack>
-      <Banner />
+      {data?.sponsors && (
+        <Banner>
+          <Stack
+            direction="row"
+            rowGap={1}
+            columnGap={5}
+            justifyContent={{ xs: "center", md: "space-between" }}
+            width="100%"
+            flexWrap="wrap"
+            px={{ xs: 2, lg: 0 }}
+            py={3}
+            maxWidth={{
+              xs: maxContentWidth.mobile,
+              md: maxContentWidth.desktop,
+            }}
+          >
+            {data?.sponsors?.map((sponsor) => (
+              <img
+                key={sponsor.id}
+                src={queryHost! + sponsor.url || ""}
+                alt="Sponsor"
+                style={{
+                  objectFit: "contain",
+                  width: 150,
+                  height: 20,
+                }}
+              />
+            ))}
+          </Stack>
+        </Banner>
+      )}
     </Stack>
   );
 }
