@@ -14,17 +14,16 @@ export default function Home() {
   const { setLoading, loading } = useLayout();
 
   useEffect(() => {
+    setLoading(true);
     getStrapiData("home").then((data) => setData(data.data));
   }, []);
 
   useEffect(() => {
     if (data) {
-      setTimeout(() => {
-        setLoading(false);
-      }, 2000);
+      setLoading(false);
     }
   }, [data]);
-  return data ? (
+  return data && !loading ? (
     <InterfaceWrapper showLayout={!loading}>
       <Hero data={data} />
     </InterfaceWrapper>

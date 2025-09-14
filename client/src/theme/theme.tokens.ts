@@ -56,14 +56,14 @@ export const surface = {
 export const buttons = {
   base: {
     primary: {
-      enabled: colors.black[600],
-      hovered: colors.black[900],
+      enabled: colors.black[900],
+      hovered: colors.black[600],
     },
     secondary: {
       enabled: colors.white[10],
       hovered: colors.black[600],
     },
-    disabled: colors.white[700],
+    disabled: colors.black[500],
   },
   text: {
     contained: {
