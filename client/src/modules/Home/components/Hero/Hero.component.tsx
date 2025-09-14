@@ -163,7 +163,7 @@ export default function Hero() {
                 style={{
                   objectFit: "contain",
                   width: 150,
-                  height: 20,
+                  height: 40,
                 }}
               />
             ))}
