@@ -1,4 +1,4 @@
-"use client";
+  "use client";
 
 import { palette } from "@/theme/palette";
 import { Link, Stack, Typography } from "@mui/material";

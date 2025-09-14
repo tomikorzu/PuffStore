@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import AppProvider from "@/modules/shared/providers/AppProvider.provider";
-import InterfaceWrapper from "@/modules/shared/components/InterfaceWrapper/InterfaceWrapper.component";
-import { Montserrat, Inter } from "next/font/google";
+import { Montserrat, Candal } from "next/font/google";
 
 export const metadata: Metadata = {
   title: "Zennify",
@@ -13,8 +12,8 @@ export const mainFont = Montserrat({
   subsets: ["latin"],
 });
 
-export const secondaryFont = Inter({
-  weight: ["400", "500", "600", "700"],
+export const secondaryFont = Candal({
+  weight: ["400"],
   subsets: ["latin"],
 });
 
@@ -25,10 +24,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={mainFont.className}>
-        <AppProvider>
-          <InterfaceWrapper>{children}</InterfaceWrapper>
-        </AppProvider>
+      <body className={mainFont.className + " " + secondaryFont.className}>
+        <AppProvider>{children}</AppProvider>
       </body>
     </html>
   );

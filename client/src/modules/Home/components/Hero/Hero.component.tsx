@@ -1,51 +1,13 @@
-"use client";
-
-import { Button, Divider, Skeleton, Stack, Typography } from "@mui/material";
+import { Button, Divider, Stack, Typography } from "@mui/material";
 import { palette } from "@/theme/palette";
 import { maxContentWidth } from "@/modules/shared/constants/units";
 import Stats from "./components/Stats.component";
 import { AutoAwesome } from "@mui/icons-material";
 import Banner from "./components/Banner.component";
-import { useEffect, useState } from "react";
-import { getStrapiData, queryHost } from "@/modules/shared/utils/strapi.util";
+import { queryHost } from "@/modules/shared/utils/strapi.util";
+import { HomeData } from "@/app/page";
 
-interface HomeData {
-  title: string;
-  description: string;
-  image: {
-    url: string;
-  };
-  Stats: {
-    id: string;
-    title: string;
-    description: string;
-  }[];
-  sponsors: {
-    id: string;
-    url: string;
-  }[];
-}
-
-export default function Hero() {
-  const [data, setData] = useState<HomeData | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  console.log(data);
-
-  useEffect(() => {
-    if (data) {
-      setLoading(false);
-    }
-  }, [data]);
-
-  useEffect(() => {
-    getStrapiData("home").then((data) => setData(data.data));
-  }, []);
-
-  if (loading) {
-    return <Skeleton variant="rectangular" height={500} />;
-  }
-
+export default function Hero({ data }: { data: HomeData }) {
   return (
     <Stack
       component="section"

@@ -1,5 +1,6 @@
 import ThemeProvider from "./ThemeProvider.provider";
 import HydrationBoundary from "./HydrationBoundary";
+import LayoutProvider from "./LayoutProvider.provider";
 
 export default function AppProvider({
   children,
@@ -8,7 +9,9 @@ export default function AppProvider({
 }) {
   return (
     <ThemeProvider>
-      <HydrationBoundary>{children}</HydrationBoundary>
+      <HydrationBoundary>
+        <LayoutProvider>{children}</LayoutProvider>
+      </HydrationBoundary>
     </ThemeProvider>
   );
 }
