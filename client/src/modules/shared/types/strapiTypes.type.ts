@@ -2,6 +2,9 @@ export interface LoginData {
   title: string;
   description: string;
   cta_text: string;
+  image: {
+    url: string;
+  };
 }
 
 export interface HomeData {

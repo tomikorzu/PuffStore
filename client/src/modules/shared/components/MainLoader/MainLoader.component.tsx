@@ -9,7 +9,7 @@ export default function MainLoader({ open }: MainLoaderProps) {
     <Modal
       open={open}
       sx={{
-        backgroundColor: "#444",
+        backgroundColor: "#eee",
       }}
     >
       <Fade in={open}>

@@ -8,6 +8,7 @@ import { getStrapiData } from "../shared/utils/strapi.util";
 import { useState } from "react";
 import MainLoader from "../shared/components/MainLoader/MainLoader.component";
 import { HomeData } from "../shared/types/strapiTypes.type";
+import NewArrivals from "./components/NewArrivals/NewArrivals.component";
 
 export default function Home() {
   const [data, setData] = useState<HomeData | null>(null);
@@ -26,6 +27,7 @@ export default function Home() {
   return data && !loading ? (
     <InterfaceWrapper showLayout={!loading}>
       <Hero data={data} />
+      <NewArrivals data={data} />
     </InterfaceWrapper>
   ) : (
     <MainLoader open={loading} />

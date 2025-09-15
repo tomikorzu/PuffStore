@@ -2,6 +2,7 @@ import { createTheme } from "@mui/material/styles";
 import { palette } from "./palette";
 import { typography } from "./typography";
 import { button } from "./components/button";
+import { chip } from "./components/chip";
 
 export const theme = createTheme({
   palette,
@@ -18,5 +19,6 @@ export const theme = createTheme({
   // @ts-expect-error MUI type mismatch
   components: {
     ...button,
+    ...chip,
   },
 });

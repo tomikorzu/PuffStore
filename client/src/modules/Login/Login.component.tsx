@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Box,
   Button,
   Divider,
   Fab,
@@ -14,7 +15,7 @@ import { useEffect, useState } from "react";
 import { Apple, ArrowBack, Facebook, Google, Info } from "@mui/icons-material";
 import { palette } from "@/theme/palette";
 import { useRouter } from "next/navigation";
-import { getStrapiData } from "../shared/utils/strapi.util";
+import { getStrapiData, queryHost } from "../shared/utils/strapi.util";
 import MainLoader from "../shared/components/MainLoader/MainLoader.component";
 import { LoginData } from "../shared/types/strapiTypes.type";
 
@@ -53,7 +54,12 @@ export default function Login() {
   }, [data]);
 
   return data && !loading ? (
-    <Stack justifyContent="center" minHeight="100dvh">
+    <Stack
+      direction={{ xs: "column", md: "row" }}
+      justifyContent="center"
+      width="100%"
+      minHeight="100dvh"
+    >
       <Stack
         justifyContent="center"
         alignItems="center"
@@ -115,6 +121,19 @@ export default function Login() {
           <Button disabled={otpValue.length === 0}>{data.cta_text}</Button>
         </Stack>
       </Stack>
+      <Box
+        width="100%"
+        height="100dvh"
+        sx={{
+          bgcolor: palette.surface.level2Negative,
+        }}
+      >
+        <img
+          src={queryHost! + data?.image?.url || ""}
+          alt="Login Image"
+          style={{ width: "100%", height: "100dvh", objectFit: "cover" }}
+        />
+      </Box>
     </Stack>
   ) : (
     <MainLoader open={loading} />

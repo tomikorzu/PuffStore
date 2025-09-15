@@ -69,7 +69,7 @@ export default function Hero({ data }: { data: HomeData }) {
         </Stack>
         <Stack
           position="relative"
-          flex={0.9}
+          flex={0.7}
           sx={{
             width: { xs: "110%", md: "auto" },
             ml: { xs: -2, md: 0 },
