@@ -9,6 +9,7 @@ import { useState } from "react";
 import MainLoader from "../shared/components/MainLoader/MainLoader.component";
 import { HomeData } from "../shared/types/strapiTypes.type";
 import NewArrivals from "./components/NewArrivals/NewArrivals.component";
+import TopSellings from "./components/TopSellings/TopSellings.component";
 
 export default function Home() {
   const [data, setData] = useState<HomeData | null>(null);
@@ -28,6 +29,7 @@ export default function Home() {
     <InterfaceWrapper showLayout={!loading}>
       <Hero data={data} />
       <NewArrivals data={data} />
+      <TopSellings data={data} />
     </InterfaceWrapper>
   ) : (
     <MainLoader open={loading} />

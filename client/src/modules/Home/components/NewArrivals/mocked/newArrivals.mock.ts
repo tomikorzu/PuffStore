@@ -1,3 +1,5 @@
+import { Categories } from "@/modules/shared/constants/product";
+
 export const newArrivals = [
   {
     id: "1",
@@ -5,6 +7,8 @@ export const newArrivals = [
     price: 45000,
     rating: 4.8,
     percentageDiscount: 15,
+    sales: 100,
+    category: Categories.VAPERS,
     image:
       "https://www.shopsmokeless.com/cdn/shop/products/cranberry_grape_bc5000_600x_35c2f39e-b5f2-4fcd-9335-c54874101e39.png?v=1677274608",
   },
@@ -13,6 +17,8 @@ export const newArrivals = [
     name: "Jeans Slim Fit Azul Marino",
     price: 120000,
     rating: 4.6,
+    category: Categories.ACCESSORIES,
+    sales: 0,
     image:
       "https://www.shopsmokeless.com/cdn/shop/products/cranberry_grape_bc5000_600x_35c2f39e-b5f2-4fcd-9335-c54874101e39.png?v=1677274608",
   },
@@ -22,6 +28,8 @@ export const newArrivals = [
     price: 180000,
     rating: 4.7,
     percentageDiscount: 12,
+    category: Categories.VAPERS,
+    sales: 20,
     image:
       "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&h=500&fit=crop",
   },
@@ -31,8 +39,10 @@ export const newArrivals = [
     price: 95000,
     rating: 4.9,
     percentageDiscount: 25,
+    category: Categories.BATTERIES,
     image:
       "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=500&fit=crop",
+    sales: 20,
   },
   {
     id: "5",
@@ -40,6 +50,8 @@ export const newArrivals = [
     price: 250000,
     rating: 4.5,
     percentageDiscount: 18,
+    category: Categories.ACCESSORIES,
+    sales: 20,
     image:
       "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=500&fit=crop",
   },
@@ -49,6 +61,8 @@ export const newArrivals = [
     price: 85000,
     rating: 4.4,
     percentageDiscount: 10,
+    category: Categories.ACCESSORIES,
+    sales: 20,
     image:
       "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=500&fit=crop",
   },
@@ -58,6 +72,8 @@ export const newArrivals = [
     price: 110000,
     rating: 4.3,
     percentageDiscount: 22,
+    category: Categories.ACCESSORIES,
+    sales: 20,
     image:
       "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=500&fit=crop",
   },
@@ -66,6 +82,8 @@ export const newArrivals = [
     name: "Blusa Seda Floral",
     price: 75000,
     rating: 4.8,
+    category: Categories.ACCESSORIES,
+    sales: 20,
     percentageDiscount: 15,
     image:
       "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=500&fit=crop",
@@ -75,6 +93,8 @@ export const newArrivals = [
     name: "Zapatos Oxford Cuero Negro",
     price: 320000,
     rating: 4.6,
+    category: Categories.ACCESSORIES,
+    sales: 20,
     percentageDiscount: 30,
     image:
       "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=500&fit=crop",
@@ -83,6 +103,8 @@ export const newArrivals = [
     id: "10",
     name: "Shorts Deportivos Azul",
     price: 55000,
+    category: Categories.ACCESSORIES,
+    sales: 20,
     rating: 4.2,
     percentageDiscount: 8,
     image:
@@ -94,6 +116,8 @@ export const newArrivals = [
     price: 280000,
     rating: 4.9,
     percentageDiscount: 35,
+    category: Categories.ACCESSORIES,
+    sales: 20,
     image:
       "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&h=500&fit=crop",
   },
@@ -103,6 +127,8 @@ export const newArrivals = [
     price: 38000,
     rating: 4.1,
     percentageDiscount: 12,
+    category: Categories.ACCESSORIES,
+    sales: 20,
     image:
       "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=500&fit=crop",
   },
@@ -112,6 +138,8 @@ export const newArrivals = [
     price: 68000,
     rating: 4.7,
     percentageDiscount: 20,
+    category: Categories.ACCESSORIES,
+    sales: 20,
     image:
       "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=500&fit=crop",
   },
@@ -121,6 +149,8 @@ export const newArrivals = [
     price: 140000,
     rating: 4.5,
     percentageDiscount: 16,
+    category: Categories.ACCESSORIES,
+    sales: 20,
     image:
       "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&h=500&fit=crop",
   },
@@ -130,6 +160,7 @@ export const newArrivals = [
     price: 195000,
     rating: 4.8,
     percentageDiscount: 28,
+    sales: 20,
     image:
       "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=500&fit=crop",
   },
@@ -139,6 +170,8 @@ export const newArrivals = [
     price: 62000,
     rating: 4.4,
     percentageDiscount: 14,
+    category: Categories.ACCESSORIES,
+    sales: 20,
     image:
       "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=500&fit=crop",
   },
@@ -148,6 +181,8 @@ export const newArrivals = [
     price: 89000,
     rating: 4.6,
     percentageDiscount: 18,
+    category: Categories.ACCESSORIES,
+    sales: 20,
     image:
       "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=500&fit=crop",
   },
@@ -157,6 +192,8 @@ export const newArrivals = [
     price: 135000,
     rating: 4.7,
     percentageDiscount: 24,
+    category: Categories.ACCESSORIES,
+    sales: 20,
     image:
       "https://images.unsplash.com/photo-1542272604-787c3835535d?w=400&h=500&fit=crop",
   },
@@ -166,6 +203,8 @@ export const newArrivals = [
     price: 105000,
     rating: 4.3,
     percentageDiscount: 19,
+    category: Categories.ACCESSORIES,
+    sales: 20,
     image:
       "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=500&fit=crop",
   },
@@ -175,6 +214,8 @@ export const newArrivals = [
     price: 165000,
     rating: 4.5,
     percentageDiscount: 26,
+    category: Categories.ACCESSORIES,
+    sales: 10000,
     image:
       "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=500&fit=crop",
   },

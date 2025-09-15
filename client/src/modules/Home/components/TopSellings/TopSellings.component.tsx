@@ -1,15 +1,18 @@
-import { HomeData } from "@/modules/shared/types/strapiTypes.type";
 import { Stack } from "@mui/material";
-import { newArrivals } from "./mocked/newArrivals.mock";
+import { newArrivals } from "../NewArrivals/mocked/newArrivals.mock";
+import Section from "../Section/Section.component";
 import ProductCard from "@/modules/shared/components/ProductCard/ProductCard.component";
 import { Product } from "@/modules/shared/components/ProductCard/types/product.type";
-import Section from "../../components/Section/Section.component";
+import { HomeData } from "@/modules/shared/types/strapiTypes.type";
 
-export default function NewArrivals({ data }: { data: HomeData }) {
+export default function TopSellings({ data }: { data: HomeData }) {
+  function getTopSellings(sellings: Product[]) {
+    return sellings.sort((a, b) => b.sales - a.sales);
+  }
   return (
     <Section
-      title="Nuevos productos"
-      description="Descubrí los últimos vapers que agregamos a nuestra colección"
+      title="Más vendidos"
+      description="Descubrí los productos más vendidos en nuestra tienda"
     >
       <Stack
         direction="row"
@@ -27,8 +30,8 @@ export default function NewArrivals({ data }: { data: HomeData }) {
           },
         }}
       >
-        {newArrivals.map((product) => (
-          <ProductCard key={product.id} product={product as Product} />
+        {getTopSellings(newArrivals as Product[]).map((product) => (
+          <ProductCard key={product.id} product={product} />
         ))}
       </Stack>
     </Section>

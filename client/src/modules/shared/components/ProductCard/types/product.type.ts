@@ -9,4 +9,5 @@ export interface Product {
   percentageDiscount: number;
   category: Categories;
   flavour: Flavours[];
+  sales: number;
 }

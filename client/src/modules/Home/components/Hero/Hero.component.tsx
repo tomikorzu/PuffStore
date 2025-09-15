@@ -4,6 +4,7 @@ import { maxContentWidth } from "@/modules/shared/constants/units";
 import Stats from "./components/Stats.component";
 import { queryHost } from "@/modules/shared/utils/strapi.util";
 import { HomeData } from "@/modules/shared/types/strapiTypes.type";
+import { ShoppingBag } from "@mui/icons-material";
 
 export default function Hero({ data }: { data: HomeData }) {
   return (
@@ -58,6 +59,7 @@ export default function Hero({ data }: { data: HomeData }) {
             </Stack>
           )}
           <Button
+            startIcon={<ShoppingBag fontSize="small" />}
             sx={{
               borderRadius: palette.radius.pill,
               maxWidth: { xs: "auto", md: "fit-content" },
