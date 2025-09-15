@@ -13,7 +13,7 @@ export default function CustomerReviews() {
 
   const userReview = reviews.find((review) => review?.createdBy?.id === 1);
 
-  let reviewsToShow = [];
+  const reviewsToShow = [];
   if (userReview) {
     reviewsToShow.push(userReview);
   }
