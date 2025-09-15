@@ -85,7 +85,9 @@ export default function ProductCard({ product }: { product: Product }) {
           </Stack>
         </CardContent>
         <CardActions sx={{ px: 1.5, pb: 2 }}>
-          <Button fullWidth startIcon={<ShoppingCart fontSize="small" />}>Agregar</Button>
+          <Button fullWidth startIcon={<ShoppingCart fontSize="small" />}>
+            Agregar
+          </Button>
         </CardActions>
       </Card>
     </Grow>

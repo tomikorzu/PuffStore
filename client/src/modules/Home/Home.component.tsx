@@ -28,8 +28,8 @@ export default function Home() {
   return data && !loading ? (
     <InterfaceWrapper showLayout={!loading}>
       <Hero data={data} />
-      <NewArrivals data={data} />
-      <TopSellings data={data} />
+      <NewArrivals />
+      <TopSellings />
     </InterfaceWrapper>
   ) : (
     <MainLoader open={loading} />

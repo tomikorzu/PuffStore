@@ -20,7 +20,7 @@ export default function Hero({ data }: { data: HomeData }) {
           maxWidth: { xs: maxContentWidth.mobile, md: maxContentWidth.desktop },
           width: "100%",
           pt: { xs: 5, md: 0 },
-          px: { xs: 2, lg: 0 },
+          px: { xs: 2, xl: 0 },
         }}
       >
         <Stack gap={3} flex={0.9} justifyContent="center">

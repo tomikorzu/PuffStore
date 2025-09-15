@@ -10,4 +10,5 @@ export interface Product {
   category: Categories;
   flavour: Flavours[];
   sales: number;
+  entryDate: string;
 }
