@@ -52,7 +52,7 @@ export default function ProductCard({ product }: { product: Product }) {
             }}
           />
           <Stack pt={1} px={1.5}>
-            <Rating value={product.rating} readOnly size="small" />
+            <Rating value={product.rating} precision={0.5} readOnly size="small" />
             <Stack direction="row" alignItems="center" gap={1}>
               <Typography fontWeight={600} noWrap>
                 {product.name}

@@ -9,7 +9,7 @@ export const data = [
     percentageDiscount: 10,
     sales: 320,
     category: Categories.VAPERS,
-    entryDate: "2025-08-01T14:32:00.000Z",
+    entryDate: "2024-12-15T14:32:00.000Z",
     image:
       "https://www.shopsmokeless.com/cdn/shop/products/cranberry_grape_bc5000_600x_35c2f39e-b5f2-4fcd-9335-c54874101e39.png?v=1677274608",
   },
@@ -20,7 +20,7 @@ export const data = [
     rating: 4.8,
     sales: 180,
     category: Categories.VAPERS,
-    entryDate: "2025-08-05T11:12:00.000Z",
+    entryDate: "2024-12-18T11:12:00.000Z",
     image:
       "https://www.shopsmokeless.com/cdn/shop/products/cranberry_grape_bc5000_600x_35c2f39e-b5f2-4fcd-9335-c54874101e39.png?v=1677274608",
   },
@@ -32,7 +32,7 @@ export const data = [
     percentageDiscount: 12,
     category: Categories.VAPERS,
     sales: 450,
-    entryDate: "2025-08-08T16:22:00.000Z",
+    entryDate: "2024-12-20T16:22:00.000Z",
     image:
       "https://www.shopsmokeless.com/cdn/shop/products/cranberry_grape_bc5000_600x_35c2f39e-b5f2-4fcd-9335-c54874101e39.png?v=1677274608",
   },
@@ -44,7 +44,7 @@ export const data = [
     percentageDiscount: 5,
     category: Categories.BATTERIES,
     sales: 95,
-    entryDate: "2025-08-10T09:44:00.000Z",
+    entryDate: "2024-12-10T09:44:00.000Z",
     image:
       "https://www.shopsmokeless.com/cdn/shop/products/cranberry_grape_bc5000_600x_35c2f39e-b5f2-4fcd-9335-c54874101e39.png?v=1677274608",
   },
@@ -56,7 +56,7 @@ export const data = [
     percentageDiscount: 15,
     category: Categories.VAPERS,
     sales: 400,
-    entryDate: "2025-08-14T13:18:00.000Z",
+    entryDate: "2024-12-22T13:18:00.000Z",
     image:
       "https://www.shopsmokeless.com/cdn/shop/products/cranberry_grape_bc5000_600x_35c2f39e-b5f2-4fcd-9335-c54874101e39.png?v=1677274608",
   },

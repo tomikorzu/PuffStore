@@ -77,8 +77,8 @@ export const buttons = {
       disabled: colors.white[700],
     },
     text: {
-      enabled: colors.white[10],
-      hovered: colors.black[600],
+      enabled: colors.white[50],
+      hovered: colors.black[900],
       disabled: colors.white[700],
     },
   },

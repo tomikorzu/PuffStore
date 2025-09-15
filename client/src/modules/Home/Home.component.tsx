@@ -10,6 +10,7 @@ import MainLoader from "../shared/components/MainLoader/MainLoader.component";
 import { HomeData } from "../shared/types/strapiTypes.type";
 import NewArrivals from "./components/NewArrivals/NewArrivals.component";
 import TopSellings from "./components/TopSellings/TopSellings.component";
+import CustomerReviews from "./components/CustomersReviews/CustomerReviews.component";
 
 export default function Home() {
   const [data, setData] = useState<HomeData | null>(null);
@@ -30,6 +31,7 @@ export default function Home() {
       <Hero data={data} />
       <NewArrivals />
       <TopSellings />
+      <CustomerReviews />
     </InterfaceWrapper>
   ) : (
     <MainLoader open={loading} />

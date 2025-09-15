@@ -81,7 +81,11 @@ const getVariantStyles = (variant: string, color: string) => {
 
   if (variant === "text") {
     base.backgroundColor = "transparent";
-    base.color = `var(--hover-color-${color})`;
+    base.color = `var(--hover-color-text)`;
+    // @ts-expect-error MUI type mismatch
+    base["&:hover"] = {
+      color: `var(--hover-color-text)`,
+    };
     base.borderColor = "transparent";
 
     if (color === "destructive") {
@@ -141,6 +145,7 @@ export const button = {
         "--color-secondary": palette.buttons.text.contained.enabled,
         "--color-accent": palette.buttons.text.contained.enabled,
         "--color-destructive": palette.buttons.text.contained.enabled,
+        "--color-text": palette.buttons.text.text.enabled,
 
         "--background-color-primary": palette.buttons.base.primary.enabled,
         "--background-color-secondary": palette.buttons.base.secondary.enabled,
@@ -158,6 +163,7 @@ export const button = {
         "--hover-color-secondary": palette.buttons.text.contained.enabled,
         "--hover-color-accent": palette.buttons.text.contained.enabled,
         "--hover-color-destructive": palette.buttons.text.contained.enabled,
+        "--hover-color-text": palette.buttons.text.text.hovered,
 
         "--hover-background-color-primary":
           palette.buttons.base.primary.hovered,
