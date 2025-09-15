@@ -14,6 +14,9 @@ import { useEffect, useState } from "react";
 import { Apple, ArrowBack, Facebook, Google, Info } from "@mui/icons-material";
 import { palette } from "@/theme/palette";
 import { useRouter } from "next/navigation";
+import { getStrapiData } from "../shared/utils/strapi.util";
+import MainLoader from "../shared/components/MainLoader/MainLoader.component";
+import { LoginData } from "../shared/types/strapiTypes.type";
 
 interface ProviderButtonProps {
   provider: string;
@@ -35,15 +38,21 @@ function ProviderButton({ provider, icon, label, sx }: ProviderButtonProps) {
 }
 
 export default function Login() {
-  const { setLoading } = useLayout();
+  const { setLoading, loading } = useLayout();
   const router = useRouter();
   const [otpError, setOtpError] = useState(false);
   const [otpValue, setOtpValue] = useState("");
+  const [data, setData] = useState<LoginData | null>(null);
+
+  useEffect(() => {
+    setLoading(true);
+    getStrapiData("login").then((data) => setData(data.data));
+  }, []);
   useEffect(() => {
     setLoading(false);
-  }, []);
+  }, [data]);
 
-  return (
+  return data && !loading ? (
     <Stack justifyContent="center" minHeight="100dvh">
       <Stack
         justifyContent="center"
@@ -63,7 +72,7 @@ export default function Login() {
           sx={{ position: "absolute", top: 16, left: 16 }}
         >
           <ArrowBack sx={{ mr: 1 }} />
-          Go to the website
+          Volver al inicio
         </Fab>
         <Stack
           sx={{
@@ -73,14 +82,11 @@ export default function Login() {
           }}
         >
           <Stack gap={0.5}>
-            <Typography variant="h1">Welcome to Zennify</Typography>
-            <Typography>
-              Discover your perfect style with exclusive recommendations and
-              personalized offers
-            </Typography>
+            <Typography variant="h1">{data.title}</Typography>
+            <Typography>{data.description}</Typography>
           </Stack>
           <Stack gap={1.5}>
-            <Typography variant="body2">Quick access with:</Typography>
+            <Typography variant="body2">Acceso rápido con:</Typography>
             <ProviderButton provider="Google" icon={<Google />} />
             <ProviderButton provider="Facebook" icon={<Facebook />} />
             <ProviderButton provider="Apple" icon={<Apple />} />
@@ -88,29 +94,29 @@ export default function Login() {
           <Stack gap={1}>
             <Divider>
               <Typography variant="body2">
-                Or continue with one-time access code
+                O continuar con el código de acceso temporal
               </Typography>
             </Divider>
             <TextField
               size="small"
               label="Email"
-              placeholder="example@gmail.com"
+              placeholder="ejemplo@gmail.com"
               onChange={(e) => setOtpValue(e.target.value)}
             />
             {otpError && (
               <Stack direction="row" gap={0.5} alignItems="center">
                 <Info color="error" sx={{ fontSize: 16 }} />
                 <Typography variant="body2" color="error">
-                  Error
+                  Error al enviar el código
                 </Typography>
               </Stack>
             )}
           </Stack>
-          <Button disabled={otpValue.length === 0}>
-            Start my personalized experience!
-          </Button>
+          <Button disabled={otpValue.length === 0}>{data.cta_text}</Button>
         </Stack>
       </Stack>
     </Stack>
+  ) : (
+    <MainLoader open={loading} />
   );
 }

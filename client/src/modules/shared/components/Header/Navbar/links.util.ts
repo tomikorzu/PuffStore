@@ -1,32 +1,18 @@
 export const links = [
   {
-    label: "shop",
-    href: "/shop",
-    children: [
-      {
-        label: "All",
-        href: "/shop",
-      },
-      {
-        label: "Clothing",
-        href: "/shop/clothing",
-      },
-      {
-        label: "Accessories",
-        href: "/shop/accessories",
-      },
-    ],
+    label: "vapers",
+    href: "/vapers",
   },
   {
-    label: "on sale",
-    href: "/on-sale",
+    label: "Accesorios",
+    href: "/accesorios",
   },
   {
-    label: "new arrivals",
-    href: "/new-arrivals",
+    label: "Baterías",
+    href: "/baterias",
   },
   {
-    label: "brands",
-    href: "/brands",
+    label: "Liquidos",
+    href: "/liquidos",
   },
 ];

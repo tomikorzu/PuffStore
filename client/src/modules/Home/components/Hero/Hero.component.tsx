@@ -2,10 +2,8 @@ import { Button, Divider, Stack, Typography } from "@mui/material";
 import { palette } from "@/theme/palette";
 import { maxContentWidth } from "@/modules/shared/constants/units";
 import Stats from "./components/Stats.component";
-import { AutoAwesome } from "@mui/icons-material";
-import Banner from "./components/Banner.component";
 import { queryHost } from "@/modules/shared/utils/strapi.util";
-import { HomeData } from "@/app/page";
+import { HomeData } from "@/modules/shared/types/strapiTypes.type";
 
 export default function Hero({ data }: { data: HomeData }) {
   return (
@@ -37,101 +35,56 @@ export default function Hero({ data }: { data: HomeData }) {
           </Typography>
           <Typography>{data?.description}</Typography>
 
-          <Stack
-            direction="row"
-            gap={3}
-            flexWrap="wrap"
-            justifyContent={{ xs: "center", md: "start" }}
-            divider={
-              <Divider
-                orientation="vertical"
-                sx={{ borderWidth: 0.5, height: "auto" }}
-              />
-            }
-          >
-            {data?.Stats?.map((stat) => (
-              <Stats
-                key={stat.id}
-                title={stat.title}
-                value={stat.description}
-              />
-            ))}
-          </Stack>
+          {data?.Stats && (
+            <Stack
+              direction="row"
+              gap={3}
+              flexWrap="wrap"
+              justifyContent={{ xs: "center", md: "start" }}
+              divider={
+                <Divider
+                  orientation="vertical"
+                  sx={{ borderWidth: 0.5, height: "auto" }}
+                />
+              }
+            >
+              {data?.Stats?.map((stat) => (
+                <Stats
+                  key={stat.id}
+                  title={stat.title}
+                  value={stat.description}
+                />
+              ))}
+            </Stack>
+          )}
           <Button
             sx={{
               borderRadius: palette.radius.pill,
-              maxWidth: { xs: "auto", md: 150 },
+              maxWidth: { xs: "auto", md: "fit-content" },
+              px: 3,
             }}
           >
-            Shop Now
+            Ver tienda
           </Button>
         </Stack>
         <Stack
           position="relative"
-          flex={1}
+          flex={0.9}
           sx={{
             width: { xs: "110%", md: "auto" },
             ml: { xs: -2, md: 0 },
           }}
         >
-          <AutoAwesome
-            sx={{
-              position: "absolute",
-              top: "30%",
-              left: "5%",
-              width: 50,
-              height: 50,
-            }}
-          />
-          <AutoAwesome
-            sx={{
-              position: "absolute",
-              top: "10%",
-              right: "5%",
-              width: 75,
-              height: 75,
-            }}
-          />
           <img
             src={queryHost! + data?.image?.url || ""}
             alt="Hero Image"
             style={{
+              width: "100%",
               objectFit: "cover",
             }}
           />
         </Stack>
       </Stack>
-      {data?.sponsors && (
-        <Banner>
-          <Stack
-            direction="row"
-            rowGap={1}
-            columnGap={5}
-            justifyContent={{ xs: "center", md: "space-between" }}
-            width="100%"
-            flexWrap="wrap"
-            px={{ xs: 2, lg: 0 }}
-            py={3}
-            maxWidth={{
-              xs: maxContentWidth.mobile,
-              md: maxContentWidth.desktop,
-            }}
-          >
-            {data?.sponsors?.map((sponsor) => (
-              <img
-                key={sponsor.id}
-                src={queryHost! + sponsor.url || ""}
-                alt="Sponsor"
-                style={{
-                  objectFit: "contain",
-                  width: 150,
-                  height: 40,
-                }}
-              />
-            ))}
-          </Stack>
-        </Banner>
-      )}
     </Stack>
   );
 }

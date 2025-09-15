@@ -29,7 +29,7 @@ export default function Navbar() {
       >
         <Link href="/" component={NextLink} sx={{ textDecoration: "none" }}>
           <Typography variant="h1" textTransform="uppercase" fontWeight={700}>
-            zennify
+            PuffStore
           </Typography>
         </Link>
         <Stack
@@ -55,7 +55,7 @@ export default function Navbar() {
             <Stack position="relative">
               <TextField
                 {...params}
-                placeholder="Search for products..."
+                placeholder="Buscar productos..."
                 sx={{
                   backgroundColor: "#00000040",
                   borderRadius: palette.radius.pill,

@@ -1,4 +1,4 @@
-  "use client";
+"use client";
 
 import { palette } from "@/theme/palette";
 import { Link, Stack, Typography } from "@mui/material";
@@ -20,8 +20,8 @@ export default function TopBanner() {
           maxWidth: { xs: maxContentWidth.mobile, md: maxContentWidth.desktop },
         }}
       >
-        <Typography variant="body2" color="secondary">
-          Sign up and get 20% off to your first order.{" "}
+        <Typography variant="body2" color="secondary" textAlign="center">
+          Registrate y conseguí un 20% de descuento en tu primera compra.{" "}
           <Link
             href="/login"
             color="secondary"
@@ -31,7 +31,7 @@ export default function TopBanner() {
               textDecoration: "underline",
             }}
           >
-            Sign Up Now
+            Aquí
           </Link>
         </Typography>
       </Stack>
