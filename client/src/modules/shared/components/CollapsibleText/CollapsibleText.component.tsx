@@ -2,17 +2,18 @@
 
 import { Button, Typography } from "@mui/material";
 import { useState } from "react";
+import { maxInputLength } from "../../constants/input";
 
 interface CollapsibleTextProps {
   text: string;
-  lengthToTruncate: number;
-  lengthToExpand: number;
+  lengthToTruncate?: number;
+  lengthToExpand?: number;
 }
 
 export default function CollapsibleText({
   text,
   lengthToTruncate = 125,
-  lengthToExpand = 400,
+  lengthToExpand = maxInputLength,
 }: CollapsibleTextProps) {
   const [expanded, setExpanded] = useState(false);
   const shouldTruncate = text.length > lengthToTruncate;

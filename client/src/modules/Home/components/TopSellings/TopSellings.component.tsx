@@ -1,8 +1,8 @@
-import { Stack } from "@mui/material";
 import { data } from "../../../shared/mocked/data.mock";
 import Section from "../Section/Section.component";
 import ProductCard from "@/modules/shared/components/ProductCard/ProductCard.component";
 import { Product } from "@/modules/shared/components/ProductCard/types/product.type";
+import ScrollStack from "@/modules/shared/components/ScrollStack/ScrollStack.component";
 
 export default function TopSellings() {
   function getTopSellings(sellings: Product[]) {
@@ -17,26 +17,11 @@ export default function TopSellings() {
         title="Más vendidos"
         description="Descubrí los productos más vendidos en nuestra tienda"
       >
-        <Stack
-          direction="row"
-          sx={{
-            overflowX: "auto",
-            scrollbarWidth: "none",
-            "&::-webkit-scrollbar": {
-              display: "none",
-            },
-            gap: 2,
-            pb: 1,
-            width: "100%",
-            "& > *": {
-              flexShrink: 0,
-            },
-          }}
-        >
+        <ScrollStack>
           {getTopSellings(data as Product[]).map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
-        </Stack>
+        </ScrollStack>
       </Section>
     )
   );

@@ -1,8 +1,8 @@
-import { Stack } from "@mui/material";
 import { data } from "../../../shared/mocked/data.mock";
 import ProductCard from "@/modules/shared/components/ProductCard/ProductCard.component";
 import { Product } from "@/modules/shared/components/ProductCard/types/product.type";
 import Section from "../../components/Section/Section.component";
+import ScrollStack from "@/modules/shared/components/ScrollStack/ScrollStack.component";
 
 export default function NewArrivals() {
   function getNewArrivals(products: Product[]) {
@@ -29,26 +29,11 @@ export default function NewArrivals() {
         title="Nuevos productos"
         description="Descubrí los últimos vapers que agregamos a nuestra colección en los últimos 30 días"
       >
-        <Stack
-          direction="row"
-          sx={{
-            overflowX: "auto",
-            scrollbarWidth: "none",
-            "&::-webkit-scrollbar": {
-              display: "none",
-            },
-            gap: 2,
-            pb: 1,
-            width: "100%",
-            "& > *": {
-              flexShrink: 0,
-            },
-          }}
-        >
+        <ScrollStack>
           {newArrivals.map((product) => (
             <ProductCard key={product.id} product={product as Product} />
           ))}
-        </Stack>
+        </ScrollStack>
       </Section>
     )
   );

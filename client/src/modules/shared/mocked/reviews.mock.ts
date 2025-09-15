@@ -6,7 +6,7 @@ export const reviews = [
     date: "2024-12-15T14:30:00.000Z",
     createdBy: {
       id: 1,
-      name: "Juan Perez",
+      name: "Jose eduardo cuarto genitales ",
       email: "juanperez@gmail.com",
       image:
         "https://www.pngarts.com/files/5/Cartoon-Avatar-PNG-Image-Transparent.png",
