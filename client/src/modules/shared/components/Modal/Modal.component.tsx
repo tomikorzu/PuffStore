@@ -74,7 +74,9 @@ export default function Modal({
         {Icon && <Icon fontSize="small" />}
         {title}
       </DialogTitle>
-      <DialogContent sx={{ px: 2, pt: '16px !important', pb: 1 }}>{children}</DialogContent>
+      <DialogContent sx={{ px: 2, pt: "16px !important", pb: 1 }}>
+        {children}
+      </DialogContent>
       <DialogActions sx={{ px: 2 }}>
         {buttons ? (
           buttons

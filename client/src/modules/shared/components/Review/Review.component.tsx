@@ -80,6 +80,7 @@ export default function Review({ review }: { review: ReviewType }) {
         }}
         title="Eliminar reseña"
         description="¿Estás seguro de querer eliminar esta reseña?"
+        acceptText="Eliminar"
       />
     </>
   );
