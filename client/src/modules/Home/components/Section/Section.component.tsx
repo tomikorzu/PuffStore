@@ -1,4 +1,5 @@
 import { maxContentWidth } from "@/modules/shared/constants/units";
+import { useMediaQueryDevices } from "@/modules/shared/hooks/useMediaQueryDevices.hook";
 import { Stack, SxProps, Typography } from "@mui/material";
 
 export default function Section({
@@ -12,11 +13,11 @@ export default function Section({
   sx?: SxProps;
   description?: string;
 }) {
+  const { isMediumAndPhone } = useMediaQueryDevices();
   return (
     <Stack
       component="section"
-      alignItems="center"
-      gap={3}
+      gap={2}
       sx={{
         maxWidth: { xs: maxContentWidth.mobile, md: maxContentWidth.desktop },
         width: "100%",
@@ -26,11 +27,11 @@ export default function Section({
         ...sx,
       }}
     >
-      <Typography variant="h2" textAlign="center">
-        {title}
-      </Typography>
+      <Typography variant="h2">{title}</Typography>
       {description && (
-        <Typography variant="body2" textAlign="center">
+        <Typography
+          variant={isMediumAndPhone ? "body2" : "body1"}
+        >
           {description}
         </Typography>
       )}

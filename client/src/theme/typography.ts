@@ -19,7 +19,7 @@ export const typography = {
     fontFamily: "Candal",
   },
   h2: {
-    fontSize: "60px",
+    fontSize: "clamp(32px, 3vw, 40px)",
     fontWeight: 700,
     fontFamily: "Candal",
   },
