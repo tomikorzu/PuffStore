@@ -1,13 +1,8 @@
 import {
-  Box,
-  Button,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
   Typography,
 } from "@mui/material";
-import { Dialog } from "@mui/material";
 import Modal from "../Modal/Modal.component";
+import { ButtonColor } from "@/theme/types/button.type";
 
 interface WarningModalProps {
   open: boolean;
@@ -17,6 +12,8 @@ interface WarningModalProps {
   description?: string;
   acceptText?: string;
   cancelText?: string;
+  cancelColor?: ButtonColor;
+  acceptColor?: ButtonColor;
 }
 
 export default function WarningModal({
@@ -27,6 +24,8 @@ export default function WarningModal({
   description,
   acceptText = "Aceptar",
   cancelText = "Cancelar",
+  cancelColor = "primary",
+  acceptColor = "error",
 }: WarningModalProps) {
   return (
     <Modal
@@ -38,6 +37,8 @@ export default function WarningModal({
       acceptText={acceptText}
       cancelText={cancelText}
       useCloseButton={false}
+      acceptColor={acceptColor}
+      cancelColor={cancelColor}
     >
       {description && <Typography variant="body1">{description}</Typography>}
     </Modal>

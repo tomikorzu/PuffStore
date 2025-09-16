@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import { Close } from "@mui/icons-material";
 import { palette } from "@/theme/palette";
+import { ButtonColor } from "@/theme/types/button.type";
 
 interface ModalProps {
   children: React.ReactNode;
@@ -23,6 +24,10 @@ interface ModalProps {
   disableAccept?: boolean;
   disableCancel?: boolean;
   useCloseButton?: boolean;
+  acceptVariant?: "contained" | "outlined" | "text";
+  cancelVariant?: "contained" | "outlined" | "text";
+  cancelColor?: ButtonColor;
+  acceptColor?: ButtonColor;
 }
 
 export default function Modal({
@@ -39,6 +44,10 @@ export default function Modal({
   disableAccept = false,
   disableCancel = false,
   useCloseButton = true,
+  acceptVariant = "contained",
+  cancelVariant = "contained",
+  cancelColor = "primary",
+  acceptColor = "primary",
 }: ModalProps) {
   return (
     <Dialog
@@ -82,10 +91,20 @@ export default function Modal({
           buttons
         ) : (
           <>
-            <Button onClick={onCancel} disabled={disableCancel}>
+            <Button
+              onClick={onCancel}
+              variant={cancelVariant}
+              color={cancelColor}
+              disabled={disableCancel}
+            >
               {cancelText}
             </Button>
-            <Button onClick={onAccept} disabled={disableAccept}>
+            <Button
+              onClick={onAccept}
+              variant={acceptVariant}
+              color={acceptColor}
+              disabled={disableAccept}
+            >
               {acceptText}
             </Button>
           </>

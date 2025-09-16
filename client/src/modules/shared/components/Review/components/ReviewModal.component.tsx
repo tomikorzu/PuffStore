@@ -41,6 +41,7 @@ export default function ReviewModal({
       acceptText={isEditing ? "Guardar" : "Crear"}
       cancelText="Cancelar"
       disableAccept={reviewText.length === 0 || rating < 1}
+      acceptColor="success"
     >
       <Stack gap={2}>
         <Stack direction="row" gap={1} alignItems="center">

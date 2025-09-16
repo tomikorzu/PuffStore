@@ -24,7 +24,7 @@ const sizes = {
   },
 };
 
-const colors = ["primary", "secondary", "accent", "destructive"];
+const colors = ["primary", "secondary", "accent", "error", "success"];
 
 const getVariantStyles = (variant: string, color: string) => {
   const base = {
@@ -145,17 +145,22 @@ export const button = {
         "--color-secondary": palette.buttons.text.contained.enabled,
         "--color-accent": palette.buttons.text.contained.enabled,
         "--color-destructive": palette.buttons.text.contained.enabled,
+        "--color-success": palette.buttons.text.contained.enabled,
         "--color-text": palette.buttons.text.text.enabled,
+        "--color-error": palette.buttons.text.contained.enabled,
 
         "--background-color-primary": palette.buttons.base.primary.enabled,
         "--background-color-secondary": palette.buttons.base.secondary.enabled,
         "--background-color-accent": palette.buttons.base.primary.enabled,
-        "--background-color-destructive": palette.buttons.base.primary.enabled,
+        "--background-color-success": palette.buttons.base.success.enabled,
+        "--background-color-error": palette.buttons.base.error.enabled,
 
         "--border-color-primary": palette.buttons.base.primary.enabled,
         "--border-color-secondary": palette.buttons.base.secondary.enabled,
         "--border-color-accent": palette.buttons.base.primary.enabled,
         "--border-color-destructive": palette.buttons.base.primary.enabled,
+        "--border-color-success": palette.buttons.base.success.enabled,
+        "--border-color-error": palette.buttons.base.error.enabled,
 
         "--border-width": "2px",
 
@@ -163,6 +168,8 @@ export const button = {
         "--hover-color-secondary": palette.buttons.text.contained.enabled,
         "--hover-color-accent": palette.buttons.text.contained.enabled,
         "--hover-color-destructive": palette.buttons.text.contained.enabled,
+        "--hover-color-success": palette.buttons.text.contained.enabled,
+        "--hover-color-error": palette.buttons.text.contained.enabled,
         "--hover-color-text": palette.buttons.text.text.hovered,
 
         "--hover-background-color-primary":
@@ -172,12 +179,18 @@ export const button = {
         "--hover-background-color-accent": palette.buttons.base.primary.hovered,
         "--hover-background-color-destructive":
           palette.buttons.base.primary.hovered,
+        "--hover-background-color-success":
+          palette.buttons.base.success.hovered,
+        "--hover-background-color-error":
+          palette.buttons.base.error.hovered,
 
         "--hover-border-color-primary": "transparent",
         "--hover-border-color-secondary":
           palette.buttons.base.secondary.enabled,
         "--hover-border-color-accent": "transparent",
         "--hover-border-color-destructive": "transparent",
+        "--hover-border-color-success": palette.buttons.base.success.hovered,
+        "--hover-border-color-error": palette.buttons.base.error.hovered,
 
         textTransform: "initial",
         transition: "all 400ms ease",

@@ -27,6 +27,34 @@ export const colors = {
     25: "#FBFBFB",
     10: "#FAFAFA",
   },
+  green: {
+    900: "#005F19",
+    800: "#007E2D",
+    700: "#138F38",
+    600: "#21A143",
+    500: "#2BB04C",
+    400: "#51BC67",
+    300: "#72C882",
+    200: "#9CD7A6",
+    100: "#C3E7C8",
+    50: "#E6F5E9",
+    25: "#ECF7EE",
+    10: "#F0F8F2",
+  },
+  red: {
+    900: "#8C0001",
+    800: "#BE0007",
+    700: "#CC0018",
+    600: "#D91120",
+    500: "#EB2125",
+    400: "#F92F24",
+    300: "#F54543",
+    200: "#EB6A6A",
+    100: "#F49594",
+    50: "#FFCACF",
+    25: "#FFEAED",
+    10: "#FFF5F6",
+  },
 };
 
 export const radius = {
@@ -64,6 +92,16 @@ export const buttons = {
       hovered: colors.black[600],
     },
     disabled: colors.black[500],
+    success: {
+      enabled: colors.green[700],
+      hovered: colors.green[900],
+      disabled: colors.green[500],
+    },
+    error: {
+      enabled: colors.red[700],
+      hovered: colors.red[900],
+      disabled: colors.red[500],
+    },
   },
   text: {
     contained: {
