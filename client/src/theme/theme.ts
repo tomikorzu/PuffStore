@@ -3,6 +3,7 @@ import { palette } from "./palette";
 import { typography } from "./typography";
 import { button } from "./components/button";
 import { chip } from "./components/chip";
+import { dialog } from "./components/dialog";
 
 export const theme = createTheme({
   palette,
@@ -20,5 +21,6 @@ export const theme = createTheme({
   components: {
     ...button,
     ...chip,
+    ...dialog,
   },
 });

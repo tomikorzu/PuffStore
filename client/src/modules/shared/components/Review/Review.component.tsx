@@ -14,12 +14,14 @@ import { Rating } from "@mui/material";
 import { palette } from "@/theme/palette";
 import { getTimeByDate } from "../../utils/getDaysByDate.util";
 import CollapsibleText from "../CollapsibleText/CollapsibleText.component";
-import { Edit } from "@mui/icons-material";
+import { Delete, Edit } from "@mui/icons-material";
 import { useState } from "react";
 import ReviewModal from "./components/ReviewModal.component";
+import WarningModal from "../WarningModal/WarningModal.component";
 
 export default function Review({ review }: { review: ReviewType }) {
   const [showReviewModal, setShowReviewModal] = useState(false);
+  const [showWarningModal, setShowWarningModal] = useState(false);
   return (
     <>
       <Grow in={true} timeout={1000}>
@@ -44,9 +46,14 @@ export default function Review({ review }: { review: ReviewType }) {
                   </Stack>
                 </Stack>
                 {review.createdBy.id === 1 && (
-                  <IconButton onClick={() => setShowReviewModal(true)}>
-                    <Edit />
-                  </IconButton>
+                  <Stack direction="row">
+                    <IconButton onClick={() => setShowReviewModal(true)}>
+                      <Edit />
+                    </IconButton>
+                    <IconButton onClick={() => setShowWarningModal(true)}>
+                      <Delete />
+                    </IconButton>
+                  </Stack>
                 )}
               </Stack>
               <Rating
@@ -64,6 +71,15 @@ export default function Review({ review }: { review: ReviewType }) {
         open={showReviewModal}
         onClose={() => setShowReviewModal(false)}
         review={review}
+      />
+      <WarningModal
+        open={showWarningModal}
+        onClose={() => setShowWarningModal(false)}
+        onAccept={() => {
+          console.log("eliminar");
+        }}
+        title="Eliminar reseña"
+        description="¿Estás seguro de querer eliminar esta reseña?"
       />
     </>
   );
