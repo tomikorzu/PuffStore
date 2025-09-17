@@ -48,10 +48,10 @@ export default function Review({ review }: { review: ReviewType }) {
                 {review.createdBy.id === 1 && (
                   <Stack direction="row">
                     <IconButton onClick={() => setShowReviewModal(true)}>
-                      <Edit />
+                      <Edit fontSize="small" />
                     </IconButton>
                     <IconButton onClick={() => setShowWarningModal(true)}>
-                      <Delete />
+                      <Delete fontSize="small" />
                     </IconButton>
                   </Stack>
                 )}

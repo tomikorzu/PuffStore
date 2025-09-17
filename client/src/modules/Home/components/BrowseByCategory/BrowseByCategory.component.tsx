@@ -20,12 +20,14 @@ export default function BrowseByCategory() {
           alignItems: "center",
           bgcolor: "#F0F0F0",
           borderRadius: palette.radius.xl,
-          px: {xs: 2, md: 5},
-          py: {xs: 4, md: 5},
-          my: {xs: 2, md: 4},
+          px: { xs: 2, md: 5 },
+          py: { xs: 4, md: 5 },
+          my: { xs: 2, md: 4 },
         }}
       >
-        <Typography variant="h2" textAlign="center">Categorías para tu búsqueda</Typography>
+        <Typography variant="h2" textAlign="center">
+          Categorías para tu búsqueda
+        </Typography>
         <Grid container spacing={2} sx={{ width: "100%" }}>
           {Object.values(Vapers).map((vaper, index) => (
             <Grow key={vaper} in timeout={1000}>
