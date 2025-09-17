@@ -17,7 +17,7 @@ export const reviews = [
     review:
       "Muy confiables, siempre me han entregado el producto en el tiempo acordado",
     rating: 5,
-    date: "2024-12-18T09:15:00.000Z",
+    date: "2025-09-16T21:00:00.000Z",
     createdBy: {
       id: 2,
       name: "Maria Gomez",

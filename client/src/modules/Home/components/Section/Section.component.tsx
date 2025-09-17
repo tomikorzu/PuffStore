@@ -8,7 +8,7 @@ export default function Section({
   sx,
   description,
 }: {
-  title: string;
+  title?: string;
   children: React.ReactNode;
   sx?: SxProps;
   description?: string;
@@ -27,7 +27,7 @@ export default function Section({
         ...sx,
       }}
     >
-      <Typography variant="h2">{title}</Typography>
+      {title && <Typography variant="h2">{title}</Typography>}
       {description && (
         <Typography
           variant={isMediumAndPhone ? "body2" : "body1"}

@@ -1,4 +1,4 @@
-import { Button, Divider, Stack, Typography } from "@mui/material";
+import { Box, Button, Divider, Stack, Typography } from "@mui/material";
 import { palette } from "@/theme/palette";
 import { maxContentWidth } from "@/modules/shared/constants/units";
 import Stats from "./components/Stats.component";
@@ -73,11 +73,13 @@ export default function Hero({ data }: { data: HomeData }) {
           position="relative"
           flex={0.7}
           sx={{
+            overflow: "hidden",
             width: { xs: "110%", md: "auto" },
             ml: { xs: -2, md: 0 },
           }}
         >
-          <img
+          <Box
+            component="img"
             src={queryHost! + data?.image?.url || ""}
             alt="Hero Image"
             style={{

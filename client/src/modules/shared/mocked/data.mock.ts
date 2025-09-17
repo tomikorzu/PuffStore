@@ -11,7 +11,7 @@ export const data = [
     category: Categories.VAPERS,
     entryDate: "2024-12-15T14:32:00.000Z",
     image:
-      "https://www.shopsmokeless.com/cdn/shop/products/cranberry_grape_bc5000_600x_35c2f39e-b5f2-4fcd-9335-c54874101e39.png?v=1677274608",
+      "https://shophiddenleaf.com/cdn/shop/products/Tropical_Rainbow_Blast_Bc5000_600x_6194def1-9c4a-476f-ae70-af8c4d0b1888.webp?v=1674071921",
   },
   {
     id: "2",
@@ -22,7 +22,7 @@ export const data = [
     category: Categories.VAPERS,
     entryDate: "2024-12-18T11:12:00.000Z",
     image:
-      "https://www.shopsmokeless.com/cdn/shop/products/cranberry_grape_bc5000_600x_35c2f39e-b5f2-4fcd-9335-c54874101e39.png?v=1677274608",
+      "https://shophiddenleaf.com/cdn/shop/products/Grape_Energy_Bc5000_600x_60f775a6-6b80-4e40-871d-a71e5a0db093.webp?v=1674072134",
   },
   {
     id: "3",

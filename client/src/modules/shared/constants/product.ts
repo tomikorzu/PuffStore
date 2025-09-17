@@ -5,6 +5,13 @@ export enum Categories {
   LIQUIDS = "liquids",
 }
 
+export enum Vapers {
+  PODS = "pods",
+  MODS = "mods",
+  DESECHABLES = "desechables",
+  VAPE_PENS = "vape_pens",
+}
+
 export enum Flavours {
   STRAWBERRY = "strawberry",
   VANILLA = "vanilla",

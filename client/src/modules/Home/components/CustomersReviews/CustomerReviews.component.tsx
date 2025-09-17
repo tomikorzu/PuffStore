@@ -18,6 +18,7 @@ export default function CustomerReviews() {
     reviewsToShow.push(userReview);
   }
   reviewsToShow.push(...getLastRevies(reviews as ReviewType[]));
+  if (userReview) reviewsToShow.pop();
   return (
     reviewsToShow.length > 0 && (
       <Section
