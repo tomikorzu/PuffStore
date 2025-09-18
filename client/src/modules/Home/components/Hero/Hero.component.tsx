@@ -2,11 +2,15 @@ import { Box, Button, Divider, Stack, Typography } from "@mui/material";
 import { palette } from "@/theme/palette";
 import { maxContentWidth } from "@/modules/shared/constants/units";
 import Stats from "./components/Stats.component";
-import { queryHost } from "@/modules/shared/utils/strapi.util";
-import { HomeData } from "@/modules/shared/types/strapiTypes.type";
 import { ShoppingBag } from "@mui/icons-material";
 
-export default function Hero({ data }: { data: HomeData }) {
+const stats = [
+  { title: "50+", description: "Sabores para elegir" },
+  { title: "100+", description: "Reseñas de usuarios" },
+  { title: "200+", description: "Ventas realizadas" },
+];
+
+export default function Hero() {
   return (
     <Stack
       component="section"
@@ -32,11 +36,14 @@ export default function Hero({ data }: { data: HomeData }) {
             fontWeight={700}
             maxWidth={{ xs: 300, md: "initial" }}
           >
-            {data?.title}
+            Tu mundo de vapers, en un solo lugar
           </Typography>
-          <Typography>{data?.description}</Typography>
+          <Typography>
+            Variedad, calidad y los sabores que más te gustan. Comprá fácil y
+            recibí en tu casa
+          </Typography>
 
-          {data?.Stats && (
+          {stats && (
             <Stack
               direction="row"
               gap={3}
@@ -49,9 +56,9 @@ export default function Hero({ data }: { data: HomeData }) {
                 />
               }
             >
-              {data?.Stats?.map((stat) => (
+              {stats?.map((stat) => (
                 <Stats
-                  key={stat.id}
+                  key={stat.title}
                   title={stat.title}
                   value={stat.description}
                 />
@@ -80,7 +87,7 @@ export default function Hero({ data }: { data: HomeData }) {
         >
           <Box
             component="img"
-            src={queryHost! + data?.image?.url || ""}
+            src="/images/home/hero.png"
             alt="Hero Image"
             style={{
               width: "100%",

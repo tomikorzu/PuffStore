@@ -15,7 +15,7 @@ export default function LayoutProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   return (
     <LayoutContext.Provider

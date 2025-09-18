@@ -10,14 +10,10 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useLayout } from "@/modules/shared/providers/LayoutProvider.provider";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Apple, ArrowBack, Facebook, Google, Info } from "@mui/icons-material";
 import { palette } from "@/theme/palette";
 import { useRouter } from "next/navigation";
-import { getStrapiData, queryHost } from "../shared/utils/strapi.util";
-import MainLoader from "../shared/components/MainLoader/MainLoader.component";
-import { LoginData } from "../shared/types/strapiTypes.type";
 
 interface ProviderButtonProps {
   provider: string;
@@ -39,21 +35,11 @@ function ProviderButton({ provider, icon, label, sx }: ProviderButtonProps) {
 }
 
 export default function Login() {
-  const { setLoading, loading } = useLayout();
   const router = useRouter();
   const [otpError, setOtpError] = useState(false);
   const [otpValue, setOtpValue] = useState("");
-  const [data, setData] = useState<LoginData | null>(null);
 
-  useEffect(() => {
-    setLoading(true);
-    getStrapiData("login").then((data) => setData(data.data));
-  }, []);
-  useEffect(() => {
-    setLoading(false);
-  }, [data]);
-
-  return data && !loading ? (
+  return (
     <Stack
       direction={{ xs: "column", md: "row" }}
       justifyContent="center"
@@ -88,8 +74,11 @@ export default function Login() {
           }}
         >
           <Stack gap={0.5}>
-            <Typography variant="h1">{data.title}</Typography>
-            <Typography>{data.description}</Typography>
+            <Typography variant="h1">Bienvenido a PUFFSTORE</Typography>
+            <Typography>
+              Descubrí tu estilo perfecto con recomendaciones exclusivas y
+              ofertas personalizadas
+            </Typography>
           </Stack>
           <Stack gap={1.5}>
             <Typography variant="body2">Acceso rápido con:</Typography>
@@ -118,7 +107,9 @@ export default function Login() {
               </Stack>
             )}
           </Stack>
-          <Button disabled={otpValue.length === 0}>{data.cta_text}</Button>
+          <Button disabled={otpValue.length === 0}>
+            Iniciar mi experiencia!
+          </Button>
         </Stack>
       </Stack>
       <Box
@@ -129,13 +120,11 @@ export default function Login() {
         }}
       >
         <img
-          src={queryHost! + data?.image?.url || ""}
+          src="/images/login/background.png"
           alt="Login Image"
           style={{ width: "100%", height: "100dvh", objectFit: "cover" }}
         />
       </Box>
     </Stack>
-  ) : (
-    <MainLoader open={loading} />
   );
 }

@@ -4,10 +4,10 @@ import Header from "../Header/Header.component";
 
 export default function InterfaceWrapper({
   children,
-  showLayout,
+  showLayout = true,
 }: {
   children: React.ReactNode;
-  showLayout: boolean;
+  showLayout?: boolean;
 }) {
   return showLayout ? (
     <>
