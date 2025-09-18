@@ -3,8 +3,11 @@ import AppProvider from "@/modules/shared/providers/AppProvider.provider";
 import { Montserrat, Candal } from "next/font/google";
 
 export const metadata: Metadata = {
-  title: "Zennify",
-  description: "E-commerce platform for selling products.",
+  title: "PUFFSTORE",
+  description: "E-commerce platform for selling vaper products.",
+  icons: {
+    icon: "/images/logos/logo2.png",
+  },
 };
 
 export const mainFont = Montserrat({

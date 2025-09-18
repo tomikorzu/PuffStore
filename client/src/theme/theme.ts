@@ -4,6 +4,7 @@ import { typography } from "./typography";
 import { button } from "./components/button";
 import { chip } from "./components/chip";
 import { dialog } from "./components/dialog";
+import { snackbar } from "./components/snackbar";
 
 export const theme = createTheme({
   palette,
@@ -22,5 +23,6 @@ export const theme = createTheme({
     ...button,
     ...chip,
     ...dialog,
+    ...snackbar,
   },
 });

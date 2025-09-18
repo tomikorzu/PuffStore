@@ -1,7 +1,7 @@
 import { Vapers } from "@/modules/shared/constants/product";
 import { Box, Card, Grid, Grow, Stack, Typography } from "@mui/material";
 import Link from "next/link";
-import Section from "../Section/Section.component";
+import Section from "../../../shared/components/Section/Section.component";
 import { palette } from "@/theme/palette";
 
 const sizes = [

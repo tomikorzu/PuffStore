@@ -25,7 +25,13 @@ export default function Review({ review }: { review: ReviewType }) {
   return (
     <>
       <Grow in={true} timeout={1000}>
-        <Card sx={{ borderRadius: palette.radius.lg, maxWidth: 300 }}>
+        <Card
+          sx={{
+            borderRadius: palette.radius.lg,
+            bgcolor: "#F0F0F0",
+            maxWidth: 300,
+          }}
+        >
           <CardContent>
             <Stack gap={0.5}>
               <Stack direction="row" gap={0.5} justifyContent="space-between">

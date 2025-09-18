@@ -1,5 +1,5 @@
 import { data } from "../../../shared/mocked/data.mock";
-import Section from "../Section/Section.component";
+import Section from "../../../shared/components/Section/Section.component";
 import ProductCard from "@/modules/shared/components/ProductCard/ProductCard.component";
 import { Product } from "@/modules/shared/components/ProductCard/types/product.type";
 import ScrollStack from "@/modules/shared/components/ScrollStack/ScrollStack.component";

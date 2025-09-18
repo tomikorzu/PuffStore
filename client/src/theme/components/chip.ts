@@ -1,9 +1,11 @@
+import { palette } from "../palette";
+
 export const chip = {
   MuiChip: {
     styleOverrides: {
       root: {
-        "--background-color-error": "#fee2e2",
-        "--color-error": "#f87171",
+        "--background-color-error": palette.colors.red[25],
+        "--color-error": palette.colors.red[200],
         variants: [
           {
             props: { color: "error" },
