@@ -11,22 +11,31 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { Apple, ArrowBack, Facebook, Google, Info } from "@mui/icons-material";
+import { X, ArrowBack, Facebook, Google, Info } from "@mui/icons-material";
 import { palette } from "@/theme/palette";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 interface ProviderButtonProps {
   provider: string;
   icon: React.ReactNode;
   label?: string;
+  onClick?: (() => void) | null;
   sx?: SxProps;
 }
 
-function ProviderButton({ provider, icon, label, sx }: ProviderButtonProps) {
+function ProviderButton({
+  provider,
+  icon,
+  label,
+  onClick = null,
+  sx,
+}: ProviderButtonProps) {
   return (
     <Button
       startIcon={icon}
       size="large"
+      onClick={onClick ? onClick : () => signIn(provider.toLowerCase())}
       sx={{ textTransform: "capitalize", ...sx }}
     >
       {label || provider}
@@ -84,7 +93,7 @@ export default function Login() {
             <Typography variant="body2">Acceso rápido con:</Typography>
             <ProviderButton provider="Google" icon={<Google />} />
             <ProviderButton provider="Facebook" icon={<Facebook />} />
-            <ProviderButton provider="Apple" icon={<Apple />} />
+            <ProviderButton provider="Twitter" icon={<X />} onClick={() => signIn("twitter", { callbackUrl: "/" })} />
           </Stack>
           <Stack gap={1}>
             <Divider>

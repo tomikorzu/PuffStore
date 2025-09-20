@@ -1,12 +1,19 @@
-import { Controller, Delete, Get, Patch } from '@nestjs/common';
+import { Controller, Delete, Get, Patch, Res } from '@nestjs/common';
+import { UsersService } from './users.service';
 
 @Controller('users')
 export class UsersController {
+  constructor(private readonly usersService: UsersService) {}
+
   @Get()
-  getAllUsers() {}
+  getAllUsers() {
+    return Res();
+  }
 
   @Get(':id')
-  getUserById() {}
+  getUserById(id: number) {
+    return id;
+  }
 
   @Patch(':id')
   updateUser() {}
