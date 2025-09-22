@@ -1,13 +1,20 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { User } from 'generated/prisma';
+import { CreateUserDto } from './dto/createUser.dto';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('login')
-  login(@Body() user: User) {
+  @UsePipes(new ValidationPipe())
+  login(@Body() user: CreateUserDto) {
     console.log(user);
     return user;
   }
