@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Patch, Res } from '@nestjs/common';
+import { Controller, Delete, Get, Patch } from '@nestjs/common';
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -7,7 +7,7 @@ export class UsersController {
 
   @Get()
   getAllUsers() {
-    return Res();
+    return this.usersService.findAll();
   }
 
   @Get(':id')
