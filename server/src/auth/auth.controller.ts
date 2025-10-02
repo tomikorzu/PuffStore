@@ -25,6 +25,16 @@ export class AuthController {
     private readonly jwtService: JwtService,
   ) {}
 
+  private getErrorMessage(error: unknown): string {
+    if (error instanceof Error) {
+      return error.message;
+    }
+    if (typeof error === 'string') {
+      return error;
+    }
+    return 'An unknown error occurred';
+  }
+
   @Public()
   @Post('oauth/login')
   @HttpCode(HttpStatus.OK)
@@ -94,7 +104,8 @@ export class AuthController {
       throw new HttpException(
         {
           success: false,
-          message: 'Failed to process OAuth login',
+          message:
+            this.getErrorMessage(error) || 'Failed to process OAuth login',
           error: 'OAUTH_LOGIN_FAILED',
         },
         HttpStatus.INTERNAL_SERVER_ERROR,
@@ -120,7 +131,7 @@ export class AuthController {
       throw new HttpException(
         {
           success: false,
-          message: error.message || 'Failed to send OTP code',
+          message: this.getErrorMessage(error) || 'Failed to send OTP code',
           error: 'OTP_SEND_FAILED',
         },
         HttpStatus.BAD_REQUEST,
@@ -159,7 +170,7 @@ export class AuthController {
       throw new HttpException(
         {
           success: false,
-          message: error.message || 'Failed to verify OTP code',
+          message: this.getErrorMessage(error) || 'Failed to verify OTP code',
           error: 'OTP_VERIFICATION_FAILED',
         },
         HttpStatus.BAD_REQUEST,
