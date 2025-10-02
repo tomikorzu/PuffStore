@@ -48,6 +48,42 @@ export default function Login() {
   const [otpError, setOtpError] = useState(false);
   const [otpValue, setOtpValue] = useState("");
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    if (!otpValue || !otpValue.includes('@')) {
+      setOtpError(true);
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_API_URL + "/auth/otp/send",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email: otpValue }),
+        }
+      );
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        // TODO: Show success message and redirect to OTP verification page
+        console.log('OTP sent successfully:', data.message);
+        alert(`OTP code sent to ${otpValue}. Check the server console for the code.`);
+      } else {
+        setOtpError(true);
+        console.error('Failed to send OTP:', data.message);
+      }
+    } catch (error) {
+      setOtpError(true);
+      console.error('Error sending OTP:', error);
+    }
+  };
+
   return (
     <Stack
       direction={{ xs: "column", md: "row" }}
@@ -93,7 +129,11 @@ export default function Login() {
             <Typography variant="body2">Acceso rápido con:</Typography>
             <ProviderButton provider="Google" icon={<Google />} />
             <ProviderButton provider="Facebook" icon={<Facebook />} />
-            <ProviderButton provider="Twitter" icon={<X />} onClick={() => signIn("twitter", { callbackUrl: "/" })} />
+            <ProviderButton
+              provider="Twitter"
+              icon={<X />}
+              onClick={() => signIn("twitter", { callbackUrl: "/" })}
+            />
           </Stack>
           <Stack gap={1}>
             <Divider>
@@ -101,24 +141,26 @@ export default function Login() {
                 O continuar con el código de acceso temporal
               </Typography>
             </Divider>
-            <TextField
-              size="small"
-              label="Email"
-              placeholder="ejemplo@gmail.com"
-              onChange={(e) => setOtpValue(e.target.value)}
-            />
-            {otpError && (
-              <Stack direction="row" gap={0.5} alignItems="center">
-                <Info color="error" sx={{ fontSize: 16 }} />
-                <Typography variant="body2" color="error">
-                  Error al enviar el código
-                </Typography>
-              </Stack>
-            )}
+            <Stack component="form" onSubmit={handleSubmit} gap={2}>
+              <TextField
+                size="small"
+                label="Email"
+                placeholder="ejemplo@gmail.com"
+                onChange={(e) => setOtpValue(e.target.value)}
+              />
+              {otpError && (
+                <Stack direction="row" gap={0.5} alignItems="center">
+                  <Info color="error" sx={{ fontSize: 16 }} />
+                  <Typography variant="body2" color="error">
+                    Error al enviar el código
+                  </Typography>
+                </Stack>
+              )}
+              <Button disabled={otpValue.length === 0} type="submit">
+                Iniciar mi experiencia!
+              </Button>
+            </Stack>
           </Stack>
-          <Button disabled={otpValue.length === 0}>
-            Iniciar mi experiencia!
-          </Button>
         </Stack>
       </Stack>
       <Box
