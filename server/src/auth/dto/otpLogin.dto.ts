@@ -1,7 +1,7 @@
 import { IsEmail, IsNotEmpty } from 'class-validator';
 
 export class OtpLoginDto {
-  @IsEmail({}, { message: 'Please provide a valid email address' })
-  @IsNotEmpty({ message: 'Email is required' })
+  @IsEmail({}, { message: 'Escriba un correo electronico valido' })
+  @IsNotEmpty({ message: 'Escriba un correo electronico' })
   email: string;
 }

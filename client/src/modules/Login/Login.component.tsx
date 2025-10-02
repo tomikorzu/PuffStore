@@ -45,16 +45,12 @@ function ProviderButton({
 
 export default function Login() {
   const router = useRouter();
-  const [otpError, setOtpError] = useState(false);
+  const [otpError, setOtpError] = useState("");
   const [otpValue, setOtpValue] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
-    if (!otpValue || !otpValue.includes('@')) {
-      setOtpError(true);
-      return;
-    }
+    setOtpError("");
 
     try {
       const response = await fetch(
@@ -67,20 +63,27 @@ export default function Login() {
           body: JSON.stringify({ email: otpValue }),
         }
       );
-      
+
       const data = await response.json();
-      
+
+      if (data.error) {
+        setOtpError(data.message);
+        return;
+      }
+
       if (data.success) {
         // TODO: Show success message and redirect to OTP verification page
-        console.log('OTP sent successfully:', data.message);
-        alert(`OTP code sent to ${otpValue}. Check the server console for the code.`);
+        console.log("OTP sent successfully:", data.message);
+        alert(
+          `OTP code sent to ${otpValue}. Check the server console for the code.`
+        );
       } else {
-        setOtpError(true);
-        console.error('Failed to send OTP:', data.message);
+        setOtpError(data.message);
+        console.error("Failed to send OTP:", data.message);
       }
     } catch (error) {
-      setOtpError(true);
-      console.error('Error sending OTP:', error);
+      setOtpError("Error sending OTP");
+      console.error("Error sending OTP:", error);
     }
   };
 
@@ -142,20 +145,22 @@ export default function Login() {
               </Typography>
             </Divider>
             <Stack component="form" onSubmit={handleSubmit} gap={2}>
-              <TextField
-                size="small"
-                label="Email"
-                placeholder="ejemplo@gmail.com"
-                onChange={(e) => setOtpValue(e.target.value)}
-              />
-              {otpError && (
-                <Stack direction="row" gap={0.5} alignItems="center">
-                  <Info color="error" sx={{ fontSize: 16 }} />
-                  <Typography variant="body2" color="error">
-                    Error al enviar el código
-                  </Typography>
-                </Stack>
-              )}
+              <Stack gap={0.5}>
+                <TextField
+                  size="small"
+                  label="Email"
+                  placeholder="ejemplo@gmail.com"
+                  onChange={(e) => setOtpValue(e.target.value)}
+                />
+                {otpError && (
+                  <Stack direction="row" gap={0.5} alignItems="center">
+                    <Info color="error" sx={{ fontSize: 16 }} />
+                    <Typography variant="body2" color="error">
+                      {otpError}
+                    </Typography>
+                  </Stack>
+                )}
+              </Stack>
               <Button disabled={otpValue.length === 0} type="submit">
                 Iniciar mi experiencia!
               </Button>

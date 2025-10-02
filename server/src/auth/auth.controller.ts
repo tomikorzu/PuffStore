@@ -7,6 +7,7 @@ import {
   HttpStatus,
   HttpException,
   Get,
+  HttpCode,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { AuthService } from './auth.service';
@@ -15,6 +16,7 @@ import { OtpLoginDto } from './dto/otpLogin.dto';
 import { VerifyOtpDto } from './dto/verifyOtp.dto';
 import { Public } from './decorators/public.decorator';
 import { CurrentUser } from './decorators/current-user.decorator';
+import { AuthenticatedUser } from './interfaces/user.interface';
 
 @Controller('auth')
 export class AuthController {
@@ -25,6 +27,7 @@ export class AuthController {
 
   @Public()
   @Post('oauth/login')
+  @HttpCode(HttpStatus.OK)
   @UsePipes(new ValidationPipe({ transform: true }))
   async oauthLogin(@Body() user: CreateUserDto) {
     try {
@@ -165,7 +168,7 @@ export class AuthController {
   }
 
   @Get('profile')
-  getProfile(@CurrentUser() user: any) {
+  getProfile(@CurrentUser() user: AuthenticatedUser) {
     return {
       success: true,
       message: 'Profile retrieved successfully',
