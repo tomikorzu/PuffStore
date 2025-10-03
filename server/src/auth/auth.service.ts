@@ -60,11 +60,11 @@ export class AuthService {
 
       return {
         success: true,
-        message: 'OTP code sent successfully to your email',
+        message: 'Codigo OTP enviado correctamente a su correo',
       };
-    } catch (error) {
-      console.error('Error sending OTP:', error);
-      throw new BadRequestException('Failed to send OTP code');
+    } catch (e) {
+      console.error(e);
+      throw new BadRequestException('Error al enviar el codigo OTP');
     }
   }
 
@@ -78,12 +78,12 @@ export class AuthService {
       });
 
       if (!user) {
-        throw new BadRequestException('User not found');
+        throw new BadRequestException('Usuario no encontrado');
       }
 
       if (!user.verificationCode) {
         throw new BadRequestException(
-          'No OTP code found. Please request a new one.',
+          'No se encontro un codigo OTP. Por favor solicite uno nuevo.',
         );
       }
 
@@ -103,14 +103,14 @@ export class AuthService {
       return {
         success: true,
         user: verifiedUser,
-        message: 'Email verified successfully',
+        message: 'Email verificado correctamente',
       };
     } catch (error) {
       if (error instanceof BadRequestException) {
         throw error;
       }
-      console.error('Error verifying OTP:', error);
-      throw new BadRequestException('Failed to verify OTP code');
+      console.error(error);
+      throw new BadRequestException('Error al verificar el codigo OTP');
     }
   }
 }
