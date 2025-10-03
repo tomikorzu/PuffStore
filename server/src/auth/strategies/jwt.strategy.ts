@@ -35,7 +35,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
 
     if (!user || !user.isVerified) {
-      throw new UnauthorizedException('User not found or not verified');
+      throw new UnauthorizedException('Usuario no encontrado o no verificado');
     }
 
     return user;

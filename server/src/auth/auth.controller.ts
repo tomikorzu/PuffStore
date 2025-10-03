@@ -48,7 +48,7 @@ export class AuthController {
           {
             success: false,
             message:
-              'Missing required fields: email, image, and name are required',
+              'Faltan campos obligatorios: email, image, y name son obligatorios',
             error: 'MISSING_REQUIRED_FIELDS',
           },
           HttpStatus.BAD_REQUEST,
@@ -60,7 +60,7 @@ export class AuthController {
       if (userExists) {
         return {
           success: true,
-          message: 'Logged in successfully',
+          message: 'Inicio de sesión exitoso',
           data: {
             user: {
               id: userExists.id,
@@ -81,7 +81,7 @@ export class AuthController {
 
       return {
         success: true,
-        message: 'Account created successfully',
+        message: 'Cuenta creada correctamente',
         data: {
           user: {
             id: newUser.id,
@@ -105,7 +105,8 @@ export class AuthController {
         {
           success: false,
           message:
-            this.getErrorMessage(error) || 'Failed to process OAuth login',
+            this.getErrorMessage(error) ||
+            'Error al procesar el login con OAuth',
           error: 'OAUTH_LOGIN_FAILED',
         },
         HttpStatus.INTERNAL_SERVER_ERROR,
@@ -131,7 +132,8 @@ export class AuthController {
       throw new HttpException(
         {
           success: false,
-          message: this.getErrorMessage(error) || 'Failed to send OTP code',
+          message:
+            this.getErrorMessage(error) || 'Error al enviar el codigo OTP',
           error: 'OTP_SEND_FAILED',
         },
         HttpStatus.BAD_REQUEST,
@@ -170,7 +172,8 @@ export class AuthController {
       throw new HttpException(
         {
           success: false,
-          message: this.getErrorMessage(error) || 'Failed to verify OTP code',
+          message:
+            this.getErrorMessage(error) || 'Error al verificar el codigo OTP',
           error: 'OTP_VERIFICATION_FAILED',
         },
         HttpStatus.BAD_REQUEST,
@@ -182,7 +185,7 @@ export class AuthController {
   getProfile(@CurrentUser() user: AuthenticatedUser) {
     return {
       success: true,
-      message: 'Profile retrieved successfully',
+      message: 'Perfil obtenido correctamente',
       data: {
         user: {
           id: user.id,

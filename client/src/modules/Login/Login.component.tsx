@@ -64,10 +64,12 @@ export default function Login() {
   const [otpCodeValue, setOtpCodeValue] = useState("");
   const [showVerificationForm, setShowVerificationForm] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setOtpError("");
+    setIsLoading(true);
 
     try {
       const response = await fetch(
@@ -95,13 +97,15 @@ export default function Login() {
       }
     } catch (error) {
       setOtpError("Error sending OTP");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleVerifyOtp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     setOtpCodeError("");
+    setIsLoading(true);
 
     try {
       const response = await fetch(
@@ -130,6 +134,8 @@ export default function Login() {
       }
     } catch (error) {
       setOtpCodeError("Error verifying OTP");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -205,8 +211,8 @@ export default function Login() {
                   }}
                 />
                 {otpCodeError && <ErrorTypography message={otpCodeError} />}
-                <Button type="submit" disabled={otpCodeValue.length !== 6}>
-                  Verificar
+                <Button type="submit" disabled={otpCodeValue.length !== 6 || isLoading}>
+                  {isLoading ? 'Verificando...' : 'Verificar'}
                 </Button>
               </Stack>
             </Stack>
@@ -245,8 +251,8 @@ export default function Login() {
                     />
                     {otpError && <ErrorTypography message={otpError} />}
                   </Stack>
-                  <Button disabled={otpEmailValue.length === 0} type="submit">
-                    Iniciar mi experiencia!
+                  <Button disabled={otpEmailValue.length === 0 || isLoading} type="submit">
+                    {isLoading ? 'Enviando...' : 'Iniciar mi experiencia!'}
                   </Button>
                 </Stack>
               </Stack>

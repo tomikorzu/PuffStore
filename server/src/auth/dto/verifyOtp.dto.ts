@@ -1,12 +1,15 @@
 import { IsEmail, IsNotEmpty, IsString, Length } from 'class-validator';
 
 export class VerifyOtpDto {
-  @IsEmail({}, { message: 'Please provide a valid email address' })
-  @IsNotEmpty({ message: 'Email is required' })
+  @IsEmail(
+    {},
+    { message: 'Por favor proporcione un correo electronico valido' },
+  )
+  @IsNotEmpty({ message: 'Email es requerido' })
   email: string;
 
-  @IsString({ message: 'OTP code must be a string' })
-  @IsNotEmpty({ message: 'OTP code is required' })
-  @Length(6, 6, { message: 'OTP code must be exactly 6 digits' })
+  @IsString({ message: 'El codigo OTP debe ser un string' })
+  @IsNotEmpty({ message: 'El codigo OTP es requerido' })
+  @Length(6, 6, { message: 'El codigo OTP debe tener exactamente 6 digitos' })
   code: string;
 }
