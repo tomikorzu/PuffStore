@@ -83,7 +83,7 @@ export class AuthService {
       }
 
       if (user.verificationCode !== code) {
-        throw new BadRequestException('Invalid OTP code');
+        throw new BadRequestException('Codigo OTP incorrecto');
       }
 
       const verifiedUser = await this.prismaService.user.update({

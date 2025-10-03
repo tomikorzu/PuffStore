@@ -15,6 +15,8 @@ import { X, ArrowBack, Facebook, Google, Info } from "@mui/icons-material";
 import { palette } from "@/theme/palette";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import { MuiOtpInput } from "mui-one-time-password-input";
+import Snackbar from "../shared/components/Snackbar/Snackbar.component";
 
 interface ProviderButtonProps {
   provider: string;
@@ -43,10 +45,25 @@ function ProviderButton({
   );
 }
 
+const ErrorTypography = ({ message }: { message: string }) => {
+  return (
+    <Stack direction="row" gap={0.5} alignItems="center">
+      <Info color="error" sx={{ fontSize: 16 }} />
+      <Typography variant="body2" color="error">
+        {message}
+      </Typography>
+    </Stack>
+  );
+};
+
 export default function Login() {
   const router = useRouter();
   const [otpError, setOtpError] = useState("");
-  const [otpValue, setOtpValue] = useState("");
+  const [otpCodeError, setOtpCodeError] = useState("");
+  const [otpEmailValue, setOtpEmailValue] = useState("");
+  const [otpCodeValue, setOtpCodeValue] = useState("");
+  const [showVerificationForm, setShowVerificationForm] = useState(false);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -60,7 +77,7 @@ export default function Login() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ email: otpValue }),
+          body: JSON.stringify({ email: otpEmailValue }),
         }
       );
 
@@ -72,18 +89,59 @@ export default function Login() {
       }
 
       if (data.success) {
-        // TODO: Show success message and redirect to OTP verification page
-        console.log("OTP sent successfully:", data.message);
-        alert(
-          `OTP code sent to ${otpValue}. Check the server console for the code.`
-        );
+        setShowVerificationForm(true);
       } else {
         setOtpError(data.message);
-        console.error("Failed to send OTP:", data.message);
       }
     } catch (error) {
       setOtpError("Error sending OTP");
-      console.error("Error sending OTP:", error);
+    }
+  };
+
+  const handleVerifyOtp = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    setOtpCodeError("");
+
+    try {
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_API_URL + "/auth/otp/verify",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email: otpEmailValue, code: otpCodeValue }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.error) {
+        setOtpCodeError(data.message);
+        return;
+      }
+
+      if (data.success) {
+        setOpenSnackbar(true);
+        router.push("/");
+      } else {
+        setOtpCodeError(data.message);
+      }
+    } catch (error) {
+      setOtpCodeError("Error verifying OTP");
+    }
+  };
+
+  const handleFabAction = () => {
+    if (showVerificationForm) {
+      setShowVerificationForm(false);
+      setOtpEmailValue("");
+      setOtpCodeValue("");
+      setOtpError("");
+      setOtpCodeError("");
+    } else {
+      router.back();
     }
   };
 
@@ -108,11 +166,11 @@ export default function Login() {
         <Fab
           variant="extended"
           size="large"
-          onClick={() => router.back()}
+          onClick={handleFabAction}
           sx={{ position: "absolute", top: 16, left: 16 }}
         >
           <ArrowBack sx={{ mr: 1 }} />
-          Volver al inicio
+          {showVerificationForm ? "Volver atras" : "Volver al inicio"}
         </Fab>
         <Stack
           sx={{
@@ -121,51 +179,79 @@ export default function Login() {
             width: "100%",
           }}
         >
-          <Stack gap={0.5}>
-            <Typography variant="h1">Bienvenido a PUFFSTORE</Typography>
-            <Typography>
-              Descubrí tu estilo perfecto con recomendaciones exclusivas y
-              ofertas personalizadas
-            </Typography>
-          </Stack>
-          <Stack gap={1.5}>
-            <Typography variant="body2">Acceso rápido con:</Typography>
-            <ProviderButton provider="Google" icon={<Google />} />
-            <ProviderButton provider="Facebook" icon={<Facebook />} />
-            <ProviderButton
-              provider="Twitter"
-              icon={<X />}
-              onClick={() => signIn("twitter", { callbackUrl: "/" })}
-            />
-          </Stack>
-          <Stack gap={1}>
-            <Divider>
-              <Typography variant="body2">
-                O continuar con el código de acceso temporal
+          {showVerificationForm ? (
+            <Stack gap={1}>
+              <Typography variant="h1" component="h2">
+                Verificación de correo
               </Typography>
-            </Divider>
-            <Stack component="form" onSubmit={handleSubmit} gap={2}>
-              <Stack gap={0.5}>
-                <TextField
-                  size="small"
-                  label="Email"
-                  placeholder="ejemplo@gmail.com"
-                  onChange={(e) => setOtpValue(e.target.value)}
+              <Typography>
+                Ingrese el código de verificación que le enviamos a{" "}
+                <strong>{otpEmailValue}</strong>
+              </Typography>
+              <Stack component="form" onSubmit={handleVerifyOtp} gap={2}>
+                <MuiOtpInput
+                  value={otpCodeValue}
+                  onChange={(value) => setOtpCodeValue(value)}
+                  length={6}
+                  validateChar={(char) =>
+                    char.match(/\d/) as unknown as boolean
+                  }
+                  autoFocus
+                  TextFieldsProps={{
+                    placeholder: "-",
+                    sx: {
+                      mt: 1,
+                    },
+                  }}
                 />
-                {otpError && (
-                  <Stack direction="row" gap={0.5} alignItems="center">
-                    <Info color="error" sx={{ fontSize: 16 }} />
-                    <Typography variant="body2" color="error">
-                      {otpError}
-                    </Typography>
-                  </Stack>
-                )}
+                {otpCodeError && <ErrorTypography message={otpCodeError} />}
+                <Button type="submit" disabled={otpCodeValue.length !== 6}>
+                  Verificar
+                </Button>
               </Stack>
-              <Button disabled={otpValue.length === 0} type="submit">
-                Iniciar mi experiencia!
-              </Button>
             </Stack>
-          </Stack>
+          ) : (
+            <>
+              <Stack gap={0.5}>
+                <Typography variant="h1">Bienvenido a PUFFSTORE</Typography>
+                <Typography>
+                  Descubrí tu estilo perfecto con recomendaciones exclusivas y
+                  ofertas personalizadas
+                </Typography>
+              </Stack>
+              <Stack gap={1.5}>
+                <Typography variant="body2">Acceso rápido con:</Typography>
+                <ProviderButton provider="Google" icon={<Google />} />
+                <ProviderButton provider="Facebook" icon={<Facebook />} />
+                <ProviderButton
+                  provider="Twitter"
+                  icon={<X />}
+                  onClick={() => signIn("twitter", { callbackUrl: "/" })}
+                />
+              </Stack>
+              <Stack gap={1}>
+                <Divider>
+                  <Typography variant="body2">
+                    O continuar con el código de acceso temporal
+                  </Typography>
+                </Divider>
+                <Stack component="form" onSubmit={handleSubmit} gap={2}>
+                  <Stack gap={0.5}>
+                    <TextField
+                      size="small"
+                      label="Email"
+                      placeholder="ejemplo@gmail.com"
+                      onChange={(e) => setOtpEmailValue(e.target.value)}
+                    />
+                    {otpError && <ErrorTypography message={otpError} />}
+                  </Stack>
+                  <Button disabled={otpEmailValue.length === 0} type="submit">
+                    Iniciar mi experiencia!
+                  </Button>
+                </Stack>
+              </Stack>
+            </>
+          )}
         </Stack>
       </Stack>
       <Box
@@ -181,6 +267,12 @@ export default function Login() {
           style={{ width: "100%", height: "100dvh", objectFit: "cover" }}
         />
       </Box>
+      <Snackbar
+        text="Usuario registrado correctamente"
+        open={openSnackbar}
+        onClose={() => setOpenSnackbar(false)}
+        variant="success"
+      />
     </Stack>
   );
 }
