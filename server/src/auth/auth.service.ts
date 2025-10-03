@@ -1,6 +1,7 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { CreateUserDto } from './dto/createUser.dto';
 import { PrismaService } from 'prisma/prisma.service';
+import { User } from '@prisma/client';
 import * as crypto from 'crypto';
 
 @Injectable()
@@ -66,7 +67,7 @@ export class AuthService {
   async verifyOtpCode(
     email: string,
     code: string,
-  ): Promise<{ success: boolean; user?: any; message: string }> {
+  ): Promise<{ success: boolean; user: User; message: string }> {
     try {
       const user = await this.prismaService.user.findUnique({
         where: { email },
