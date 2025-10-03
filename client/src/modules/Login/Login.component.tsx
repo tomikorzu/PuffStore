@@ -6,26 +6,56 @@ import {
   Divider,
   Fab,
   Stack,
-  SxProps,
   TextField,
   Typography,
+  type SxProps,
+  type Theme,
 } from "@mui/material";
-import { useState } from "react";
-import { X, ArrowBack, Facebook, Google, Info } from "@mui/icons-material";
-import { palette } from "@/theme/palette";
-import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
-import { MuiOtpInput } from "mui-one-time-password-input";
 import Snackbar from "../shared/components/Snackbar/Snackbar.component";
+import { ArrowBack, Facebook, Google, X, Info } from "@mui/icons-material";
+import { MuiOtpInput } from "mui-one-time-password-input";
+import { palette } from "@/theme/palette";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+const slideVariants = {
+  enterFromRight: {
+    x: 300,
+    opacity: 0,
+  },
+  enterFromLeft: {
+    x: -300,
+    opacity: 0,
+  },
+  center: {
+    x: 0,
+    opacity: 1,
+  },
+  exitToLeft: {
+    x: -300,
+    opacity: 0,
+  },
+  exitToRight: {
+    x: 300,
+    opacity: 0,
+  },
+};
+
+const transition = {
+  type: "tween" as const,
+  ease: "easeInOut" as const,
+  duration: 0.4,
+};
 
 interface ProviderButtonProps {
   provider: string;
   icon: React.ReactNode;
   label?: string;
   onClick?: (() => void) | null;
-  sx?: SxProps;
+  sx?: SxProps<Theme>;
 }
-
 function ProviderButton({
   provider,
   icon,
@@ -183,81 +213,111 @@ export default function Login() {
             gap: 2,
             maxWidth: "500px",
             width: "100%",
+            position: "relative",
+            overflow: "hidden",
           }}
         >
-          {showVerificationForm ? (
-            <Stack gap={1}>
-              <Typography variant="h1" component="h2">
-                Verificación de correo
-              </Typography>
-              <Typography>
-                Ingrese el código de verificación que le enviamos a{" "}
-                <strong>{otpEmailValue}</strong>
-              </Typography>
-              <Stack component="form" onSubmit={handleVerifyOtp} gap={2}>
-                <MuiOtpInput
-                  value={otpCodeValue}
-                  onChange={(value) => setOtpCodeValue(value)}
-                  length={6}
-                  validateChar={(char) =>
-                    char.match(/\d/) as unknown as boolean
-                  }
-                  autoFocus
-                  TextFieldsProps={{
-                    placeholder: "-",
-                    sx: {
-                      mt: 1,
-                    },
-                  }}
-                />
-                {otpCodeError && <ErrorTypography message={otpCodeError} />}
-                <Button type="submit" disabled={otpCodeValue.length !== 6 || isLoading}>
-                  {isLoading ? 'Verificando...' : 'Verificar'}
-                </Button>
-              </Stack>
-            </Stack>
-          ) : (
-            <>
-              <Stack gap={0.5}>
-                <Typography variant="h1">Bienvenido a PUFFSTORE</Typography>
-                <Typography>
-                  Descubrí tu estilo perfecto con recomendaciones exclusivas y
-                  ofertas personalizadas
-                </Typography>
-              </Stack>
-              <Stack gap={1.5}>
-                <Typography variant="body2">Acceso rápido con:</Typography>
-                <ProviderButton provider="Google" icon={<Google />} />
-                <ProviderButton provider="Facebook" icon={<Facebook />} />
-                <ProviderButton
-                  provider="Twitter"
-                  icon={<X />}
-                  onClick={() => signIn("twitter", { callbackUrl: "/" })}
-                />
-              </Stack>
-              <Stack gap={1}>
-                <Divider>
-                  <Typography variant="body2">
-                    O continuar con el código de acceso temporal
+          <AnimatePresence mode="wait">
+            {showVerificationForm ? (
+              <motion.div
+                key="verification"
+                initial="enterFromRight"
+                animate="center"
+                exit="exitToRight"
+                variants={slideVariants}
+                transition={transition}
+                style={{ width: "100%" }}
+              >
+                <Stack gap={1}>
+                  <Typography variant="h1" component="h2">
+                    Verificación de correo
                   </Typography>
-                </Divider>
-                <Stack component="form" onSubmit={handleSubmit} gap={2}>
-                  <Stack gap={0.5}>
-                    <TextField
-                      size="small"
-                      label="Email"
-                      placeholder="ejemplo@gmail.com"
-                      onChange={(e) => setOtpEmailValue(e.target.value)}
+                  <Typography>
+                    Ingrese el código de verificación que le enviamos a{" "}
+                    <strong>{otpEmailValue}</strong>
+                  </Typography>
+                  <Stack component="form" onSubmit={handleVerifyOtp} gap={2}>
+                    <MuiOtpInput
+                      value={otpCodeValue}
+                      onChange={(value) => setOtpCodeValue(value)}
+                      length={6}
+                      validateChar={(char) =>
+                        char.match(/\d/) as unknown as boolean
+                      }
+                      autoFocus
+                      TextFieldsProps={{
+                        placeholder: "-",
+                        sx: {
+                          mt: 1,
+                        },
+                      }}
                     />
-                    {otpError && <ErrorTypography message={otpError} />}
+                    {otpCodeError && <ErrorTypography message={otpCodeError} />}
+                    <Button
+                      type="submit"
+                      disabled={otpCodeValue.length !== 6 || isLoading}
+                    >
+                      {isLoading ? "Verificando..." : "Verificar"}
+                    </Button>
                   </Stack>
-                  <Button disabled={otpEmailValue.length === 0 || isLoading} type="submit">
-                    {isLoading ? 'Enviando...' : 'Iniciar mi experiencia!'}
-                  </Button>
                 </Stack>
-              </Stack>
-            </>
-          )}
+              </motion.div>
+            ) : (
+              <motion.div
+                key="login"
+                initial="enterFromLeft"
+                animate="center"
+                exit="exitToLeft"
+                variants={slideVariants}
+                transition={transition}
+                style={{ width: "100%" }}
+              >
+                <Stack gap={2}>
+                  <Stack gap={0.5}>
+                    <Typography variant="h1">Bienvenido a PUFFSTORE</Typography>
+                    <Typography>
+                      Descubrí tu estilo perfecto con recomendaciones exclusivas
+                      y ofertas personalizadas
+                    </Typography>
+                  </Stack>
+                  <Stack gap={1.5}>
+                    <Typography variant="body2">Acceso rápido con:</Typography>
+                    <ProviderButton provider="Google" icon={<Google />} />
+                    <ProviderButton provider="Facebook" icon={<Facebook />} />
+                    <ProviderButton
+                      provider="Twitter"
+                      icon={<X />}
+                      onClick={() => signIn("twitter", { callbackUrl: "/" })}
+                    />
+                  </Stack>
+                  <Stack gap={1}>
+                    <Divider>
+                      <Typography variant="body2">
+                        O continuar con el código de acceso temporal
+                      </Typography>
+                    </Divider>
+                    <Stack component="form" onSubmit={handleSubmit} gap={2}>
+                      <Stack gap={0.5}>
+                        <TextField
+                          size="small"
+                          label="Email"
+                          placeholder="ejemplo@gmail.com"
+                          onChange={(e) => setOtpEmailValue(e.target.value)}
+                        />
+                        {otpError && <ErrorTypography message={otpError} />}
+                      </Stack>
+                      <Button
+                        disabled={otpEmailValue.length === 0 || isLoading}
+                        type="submit"
+                      >
+                        {isLoading ? "Enviando..." : "Iniciar mi experiencia!"}
+                      </Button>
+                    </Stack>
+                  </Stack>
+                </Stack>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </Stack>
       </Stack>
       <Box
