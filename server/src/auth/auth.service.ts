@@ -2,11 +2,15 @@ import { Injectable, BadRequestException } from '@nestjs/common';
 import { CreateUserDto } from './dto/createUser.dto';
 import { PrismaService } from 'prisma/prisma.service';
 import { User } from '@prisma/client';
+import { EmailService } from '../email/email.service';
 import * as crypto from 'crypto';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    private readonly prismaService: PrismaService,
+    private readonly emailService: EmailService,
+  ) {}
 
   async createUser(user: CreateUserDto) {
     return await this.prismaService.user.create({
@@ -52,7 +56,7 @@ export class AuthService {
         });
       }
 
-      console.log(`OTP Code for ${email}: ${otpCode}`);
+      await this.emailService.sendOtpEmail(email, otpCode);
 
       return {
         success: true,

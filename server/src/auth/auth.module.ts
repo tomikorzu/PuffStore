@@ -6,6 +6,7 @@ import { AuthService } from './auth.service';
 import { PrismaService } from 'prisma/prisma.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
+import { EmailModule } from '../email/email.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { JwtAuthGuard } from './guards/jwt-auth.guard';
         expiresIn: process.env.JWT_EXPIRES_IN || '7d',
       },
     }),
+    EmailModule,
   ],
   controllers: [AuthController],
   providers: [AuthService, PrismaService, JwtStrategy, JwtAuthGuard],
