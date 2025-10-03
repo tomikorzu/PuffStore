@@ -20,7 +20,6 @@ export class EmailService {
   async sendOtpEmail(email: string, otpCode: string): Promise<void> {
     const htmlTemplate = this.getOtpEmailTemplate(otpCode);
 
-    console.log(process.env.SMTP_USER);
     const mailOptions = {
       from: process.env.SMTP_FROM || process.env.SMTP_USER,
       to: email,
