@@ -199,4 +199,29 @@ export class AuthController {
       },
     };
   }
+
+  @Public()
+  @Post('cleanup/unverified')
+  @HttpCode(HttpStatus.OK)
+  async cleanupUnverifiedUsers() {
+    try {
+      const deletedCount = await this.authService.cleanupUnverifiedUsers();
+      return {
+        success: true,
+        message: `Se eliminaron ${deletedCount} usuarios no verificados`,
+        data: {
+          deletedCount,
+        },
+      };
+    } catch (error) {
+      throw new HttpException(
+        {
+          success: false,
+          message: this.getErrorMessage(error) || 'Error al limpiar usuarios',
+          error: 'CLEANUP_FAILED',
+        },
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
 }

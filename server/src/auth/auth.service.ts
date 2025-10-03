@@ -87,6 +87,17 @@ export class AuthService {
         );
       }
 
+      const tenMinutesAgo = new Date(Date.now() - 10 * 60 * 1000);
+      if (user.updatedAt < tenMinutesAgo) {
+        await this.prismaService.user.update({
+          where: { email },
+          data: { verificationCode: null },
+        });
+        throw new BadRequestException(
+          'El codigo OTP ha expirado. Por favor solicite uno nuevo.',
+        );
+      }
+
       if (user.verificationCode !== code) {
         throw new BadRequestException('Codigo OTP incorrecto');
       }
@@ -111,6 +122,26 @@ export class AuthService {
       }
       console.error(error);
       throw new BadRequestException('Error al verificar el codigo OTP');
+    }
+  }
+
+  async cleanupUnverifiedUsers(): Promise<number> {
+    try {
+      const tenMinutesAgo = new Date(Date.now() - 10 * 60 * 1000);
+
+      const deletedUsers = await this.prismaService.user.deleteMany({
+        where: {
+          isVerified: false,
+          createdAt: {
+            lt: tenMinutesAgo,
+          },
+        },
+      });
+
+      return deletedUsers.count;
+    } catch (error) {
+      console.error('Error cleaning up unverified users:', error);
+      throw new BadRequestException('Error al limpiar usuarios no verificados');
     }
   }
 }
