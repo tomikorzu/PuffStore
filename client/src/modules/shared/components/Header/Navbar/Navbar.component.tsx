@@ -91,7 +91,7 @@ export default function Navbar() {
           <IconButton>
             <ShoppingCart />
           </IconButton>
-          <IconButton>
+          <IconButton href="/account" LinkComponent={NextLink}>
             <Person />
           </IconButton>
         </Stack>
