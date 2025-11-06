@@ -1,8 +1,5 @@
-import {
-  Typography,
-} from "@mui/material";
-import Modal from "../Modal/Modal.component";
-import { ButtonColor } from "@/theme/types/button.type";
+import { Button, Typography } from "@mui/material";
+import ModalWrapper from "../ModalWrapper/ModalWrapper.component";
 
 interface WarningModalProps {
   open: boolean;
@@ -12,8 +9,6 @@ interface WarningModalProps {
   description?: string;
   acceptText?: string;
   cancelText?: string;
-  cancelColor?: ButtonColor;
-  acceptColor?: ButtonColor;
 }
 
 export default function WarningModal({
@@ -24,23 +19,24 @@ export default function WarningModal({
   description,
   acceptText = "Aceptar",
   cancelText = "Cancelar",
-  cancelColor = "primary",
-  acceptColor = "error",
 }: WarningModalProps) {
   return (
-    <Modal
+    <ModalWrapper
       open={open}
       onClose={onClose}
       title={title}
-      onAccept={onAccept}
-      onCancel={onClose}
-      acceptText={acceptText}
-      cancelText={cancelText}
+      useDesktopStylesForMobile
       useCloseButton={false}
-      acceptColor={acceptColor}
-      cancelColor={cancelColor}
+      buttons={
+        <>
+          <Button onClick={onClose}>{cancelText}</Button>
+          <Button onClick={onAccept} color="error">
+            {acceptText}
+          </Button>
+        </>
+      }
     >
       {description && <Typography variant="body1">{description}</Typography>}
-    </Modal>
+    </ModalWrapper>
   );
 }

@@ -1,13 +1,13 @@
 "use client";
 
-import { TextField, Rating, Stack, Typography } from "@mui/material";
+import { TextField, Rating, Stack, Typography, Button } from "@mui/material";
 import { Review } from "../types/review.type";
 import { Edit, Add } from "@mui/icons-material";
 import { palette } from "@/theme/palette";
 import { useState } from "react";
 import { maxInputLength } from "../../../constants/input";
-import Modal from "../../Modal/Modal.component";
 import Snackbar from "../../Snackbar/Snackbar.component";
+import ModalWrapper from "../../ModalWrapper/ModalWrapper.component";
 
 interface ReviewModalProps {
   open: boolean;
@@ -35,17 +35,24 @@ export default function ReviewModal({
   };
   return (
     <>
-      <Modal
+      <ModalWrapper
         open={open}
         onClose={onClose}
-        title={isEditing ? "Editar reseña" : "Crear reseña"}
         Icon={isEditing ? Edit : Add}
-        onAccept={handleSave}
-        onCancel={handleCancel}
-        acceptText={isEditing ? "Guardar" : "Crear"}
-        cancelText="Cancelar"
-        disableAccept={reviewText.length === 0 || rating < 1}
-        acceptColor="success"
+        title={isEditing ? "Editar reseña" : "Crear reseña"}
+        buttons={
+          <>
+            <Button onClick={handleCancel}>Cancelar</Button>
+            <Button
+              onClick={handleSave}
+              variant="contained"
+              color="success"
+              disabled={reviewText.length === 0 || rating < 1}
+            >
+              Guardar
+            </Button>
+          </>
+        }
       >
         <Stack gap={2}>
           <Stack direction="row" gap={1} alignItems="center">
@@ -81,7 +88,7 @@ export default function ReviewModal({
             </Typography>
           </Stack>
         </Stack>
-      </Modal>
+      </ModalWrapper>
       <Snackbar
         text={`Reseña ${isEditing ? "editada" : "creada"} correctamente`}
         open={openSnackbar}
