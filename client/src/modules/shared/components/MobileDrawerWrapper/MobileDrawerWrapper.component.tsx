@@ -87,7 +87,7 @@ const MobileDrawerWrapper: React.FC<MobileDrawerWrapperProps> = ({
   return (
     <Drawer
       open={open}
-      onClose={(e) => onClose(e as any)}
+      onClose={(e) => onClose(e as React.MouseEvent<HTMLButtonElement>)}
       anchor="bottom"
       sx={sx}
       PaperProps={{

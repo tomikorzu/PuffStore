@@ -10,10 +10,12 @@ import NextLink from "next/link";
 import { useState } from "react";
 import ReviewModal from "@/modules/shared/components/Review/components/ReviewModal.component";
 import { useAuth } from "@/modules/shared/providers/AuthProvider.provider";
+import { useMediaQueryDevices } from "@/modules/shared/hooks/useMediaQueryDevices.hook";
 
 export default function CustomerReviews() {
   const [showReviewModal, setShowReviewModal] = useState(false);
   const { user } = useAuth();
+  const { isMediumAndPhone } = useMediaQueryDevices();
   const maxReviewsShow = 10;
   function getLastReviews(reviews: ReviewType[]) {
     return reviews
@@ -52,10 +54,10 @@ export default function CustomerReviews() {
         description="Descubrí las opiniones de nuestros clientes"
       >
         <Stack
-          direction="row"
+          direction={{ xs: "column", md: "row" }}
           justifyContent="space-between"
           bgcolor="#F0F0F0"
-          alignItems="center"
+          alignItems={{ xs: "start", md: "center" }}
           sx={{
             px: 2,
             py: 2,
@@ -80,18 +82,29 @@ export default function CustomerReviews() {
               <Typography variant="body2">{totalReviews} reseñas</Typography>
             </Stack>
           </Stack>
-          <Stack direction="row" gap={1} alignItems="center">
+          <Stack
+            direction="row"
+            gap={1}
+            alignItems="center"
+            justifyContent="center"
+            width={{ xs: "100%", md: "auto" }}
+          >
             {!userReview && (
               <Button
                 variant="outlined"
                 color="secondary"
                 onClick={() => setShowReviewModal(true)}
+                sx={{ flex: { xs: 1, md: "initial" } }}
               >
-                Dejar tu comentario
+                {isMediumAndPhone ? "Comentar" : "Dejar tu comentario"}
               </Button>
             )}
             {reviews.length > maxReviewsShow && (
-              <Button LinkComponent={NextLink} href="/reviews">
+              <Button
+                LinkComponent={NextLink}
+                href="/reviews"
+                sx={{ minWidth: "fit-content", flex: { xs: 1, md: "initial" } }}
+              >
                 Ver todas las reseñas
               </Button>
             )}
