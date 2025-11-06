@@ -8,6 +8,7 @@ import {
   Typography,
   Grow,
   IconButton,
+  Tooltip,
 } from "@mui/material";
 import { Review as ReviewType } from "./types/review.type";
 import { Rating } from "@mui/material";
@@ -38,9 +39,11 @@ export default function Review({ review }: { review: ReviewType }) {
                 <Stack direction="row" gap={1} alignItems="center">
                   <Avatar sizes="10px" src={review.createdBy.image} />
                   <Stack gap={0.25}>
-                    <Typography variant="h5" noWrap maxWidth={150}>
-                      {review.createdBy.name}
-                    </Typography>
+                    <Tooltip title={review.createdBy.name}>
+                      <Typography variant="h5" noWrap maxWidth={150}>
+                        {review.createdBy.name}
+                      </Typography>
+                    </Tooltip>
                     <Typography
                       variant="body2"
                       fontSize={{ xs: 10, md: 12 }}

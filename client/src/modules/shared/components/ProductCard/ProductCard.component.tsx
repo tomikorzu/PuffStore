@@ -9,6 +9,7 @@ import {
   Typography,
   Chip,
   Box,
+  Tooltip,
 } from "@mui/material";
 import { Product } from "./types/product.type";
 import { currencyFormat } from "../../utils/textFormat.util";
@@ -52,11 +53,18 @@ export default function ProductCard({ product }: { product: Product }) {
             }}
           />
           <Stack pt={1} px={1.5}>
-            <Rating value={product.rating} precision={0.5} readOnly size="small" />
+            <Rating
+              value={product.rating}
+              precision={0.5}
+              readOnly
+              size="small"
+            />
             <Stack direction="row" alignItems="center" gap={1}>
-              <Typography fontWeight={600} noWrap>
-                {product.name}
-              </Typography>
+              <Tooltip title={product.name}>
+                <Typography fontWeight={600} noWrap>
+                  {product.name}
+                </Typography>
+              </Tooltip>
               {hasDiscount && (
                 <Chip
                   size="small"

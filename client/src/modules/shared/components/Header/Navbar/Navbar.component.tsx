@@ -2,6 +2,8 @@
 
 import {
   Autocomplete,
+  Avatar,
+  Badge,
   IconButton,
   Link,
   Stack,
@@ -13,8 +15,11 @@ import { maxContentWidth } from "@/modules/shared/constants/units";
 import { links } from "./links.util";
 import { Person, Search, ShoppingCart } from "@mui/icons-material";
 import NextLink from "next/link";
+import { useAuth } from "@/modules/shared/providers/AuthProvider.provider";
 
 export default function Navbar() {
+  const { user, isLogged } = useAuth();
+  const userImage = user?.image;
   return (
     <Stack bgcolor={palette.surface.level1} alignItems="center" py={3} px={2}>
       <Stack
@@ -87,13 +92,28 @@ export default function Navbar() {
             maxWidth: "600px",
           }}
         />
-        <Stack direction="row" gap={1}>
+        <Stack direction="row" gap={userImage ? 2 : 1} alignItems="center">
           <IconButton>
-            <ShoppingCart />
+            <Badge badgeContent={2} color="info">
+              <ShoppingCart />
+            </Badge>
           </IconButton>
-          <IconButton href="/account" LinkComponent={NextLink}>
-            <Person />
-          </IconButton>
+          {isLogged && userImage ? (
+            <Badge badgeContent={4} color="info">
+              <Link href="/account" component={NextLink}>
+                <Avatar src={userImage} sx={{ width: 30, height: 30 }} />
+              </Link>
+            </Badge>
+          ) : (
+            <IconButton
+              href={isLogged ? "/account" : "/login"}
+              LinkComponent={NextLink}
+            >
+              <Badge badgeContent={4} color="info">
+                <Person />
+              </Badge>
+            </IconButton>
+          )}
         </Stack>
       </Stack>
     </Stack>
